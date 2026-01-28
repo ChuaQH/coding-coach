@@ -14,6 +14,7 @@ def decide_node(state: Dict[str, Any]) -> Dict[str, Any]:
     - /done ends.
     - /answer bumps hint_level to 5 and forces a review.
     - /retry re-enters solution.
+    - /hint N changes the hint_level
     - otherwise treated as follow-up question.
     """
     sess = session_state(state)       # type: ignore[arg-type]

@@ -10,7 +10,7 @@ sys.path.insert(0, str(ROOT))
 from graph import build_graph  # noqa: E402
 
 def main() -> None:
-    out = sys.argv[1] if len(sys.argv) > 1 else "mvp_graph.png"
+    out = sys.argv[1] if len(sys.argv) > 1 else "mermaid_graph.png"
     g = build_graph()
     png = g.get_graph().draw_mermaid_png()
     with open(out, "wb") as f:
