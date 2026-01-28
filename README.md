@@ -11,58 +11,6 @@ An agentic coding coach designed to help users learn problem-solving and program
 4. The agent provides targeted feedback, hints, and analysis
 5. The user decides how to proceed (ask questions, revise, explore alternatives)
 
-## What it does
-
-1. **Understands the problem**
-   - Parses the user’s problem title
-   - Extracts a structured problem description (summary, tags, constraints)
-
-2. **(Optional) Pulls a reference solution**
-   - If the prompt is a LeetCode ID/title, fetches a Python solution and analyzes it
-
-3. **Retrieves knowledge (RAG)**
-   - Generates a retrieval query + tags
-   - Validates tags against a known vocabulary (fuzzy resolution when missing)
-   - Retrieves relevant algorithm “KB cards” from a local Chroma store
-   - Assesses whether more retrieval is needed and optionally loops
-
-4. **Human-in-the-loop attempt**
-   - Prompts you to paste a Python attempt + notes
-   - Stores attempts in state
-
-5. **Tooling feedback**
-   - Runs `ruff check` + `ruff format --diff`
-   - Runs `mypy`
-   - Retrieves PEP 8/257 excerpts relevant to the findings
-
-6. **Coaching output**
-   - Produces structured feedback following a hint ladder:
-     - `/hint N` (0–5)
-     - `/retry`, `/answer`, `/done`
-
-
-A **LangGraph-first** personal project that demonstrates how to build a stateful, multi-step, human-in-the-loop coaching workflow using:
-- **LangGraph** (graph orchestration + checkpoints)
-- **Ollama** (local LLM + embeddings)
-- **Chroma** (retrieval over an algorithm KB)
-- **ruff + mypy** (tooling feedback loop)
-- **PEP 8 / PEP 257 retrieval** (grounded style explanations)
-
-The goal of this repo is to showcase **LangGraph design patterns**: state modeling, node decomposition, conditional routing, looping, interrupts, and checkpointing.
-
----
-
-## Why this exists (LangGraph focus)
-
-This project is intentionally structured around LangGraph concepts:
-
-- **Typed / structured state** passed through the graph
-- **Small, single-purpose nodes** that read from state and return partial updates
-- **Conditional edges** to route based on state (e.g., retrieval continuation, follow-up intent)
-- **Loops** for iterative retrieval and iterative coaching (`decide -> followup/review -> decide`)
-- **Human-in-the-loop** interaction via LangGraph `interrupt` / `Command(resume=...)`
-- **Checkpointing** using `InMemorySaver` (easy to swap to persistent storage later)
-
 ---
 
 ## What it does
@@ -176,7 +124,7 @@ This project is intentionally structured around LangGraph concepts:
         - Embedded as rich text for semantic similarity search
         - Include boolean tag flags to support tag-based queries
 - In-Memory Vector Store
-    - Populated with PEP8 and PEP257 documents
+    - Populated with ```PEP8``` and ```PEP257``` documents
         - Source HTML is parsed and segmented into semantically meaningful sections based on document headers (h1–h3)
         - Each section is stored as an individual document containing:
             - Header path (hierarchical context of the section)
