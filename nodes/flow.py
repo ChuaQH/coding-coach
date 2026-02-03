@@ -17,9 +17,9 @@ def decide_node(state: Dict[str, Any]) -> Dict[str, Any]:
     - /hint N changes the hint_level
     - otherwise treated as follow-up question.
     """
-    sess = session_state(state)       # type: ignore[arg-type]
-    prob = problem_state(state)       # type: ignore[arg-type]
-    fol = followup_state(state)       # type: ignore[arg-type]
+    sess = session_state(state)       
+    prob = problem_state(state)       
+    fol = followup_state(state)       
 
     payload = interrupt({
         "message": "Enter a command (/done, /answer, /retry, /hint N) or type a follow-up question:",
@@ -32,7 +32,7 @@ def decide_node(state: Dict[str, Any]) -> Dict[str, Any]:
     cmd = raw.lower().strip()
     log_stage("decide", "command", {"command": cmd})
 
-    # defaults for each decide turn
+    # Defaults for each decide turn
     fol.has_followup_question = False
     fol.followup_question = ""
     sess.force_review = False
@@ -65,7 +65,7 @@ def decide_node(state: Dict[str, Any]) -> Dict[str, Any]:
         sess.retry = False
         return {"session": sess.model_dump(), "followup": fol.model_dump()}
 
-    # default: follow-up question
+    # Default to follow-up question
     sess.done = False
     sess.retry = False
     fol.has_followup_question = True
@@ -74,8 +74,8 @@ def decide_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def route_next(state: Dict[str, Any]) -> Literal["continue", "end", "followup", "review"]:
-    sess = session_state(state)       # type: ignore[arg-type]
-    fol = followup_state(state)       # type: ignore[arg-type]
+    sess = session_state(state)       
+    fol = followup_state(state)       
 
     if sess.done:
         return "end"

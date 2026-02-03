@@ -58,50 +58,50 @@ def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     mode = "solution_guided" if use_solution else "problem_only"
 
     SYSTEM = """
-You generate a retrieval query for a knowledge base of algorithm cards.
+    You generate a retrieval query for a knowledge base of algorithm cards.
 
-Return ONLY JSON with:
-- query: a concise search string combining high-signal keywords and tags
-- query_parts: {"title_keywords": [...], "summary_keywords": [...], "constraint_keywords": [...], "tags": [...], "key_ideas": [...]}
-- must_tags: tags that must be present
-- should_tags: tags that are helpful
-- avoid_tags: tags that are misleading
-- rationale: 1–2 sentences describing how the query aligns to the stored card fields
+    Return ONLY JSON with:
+    - query: a concise search string combining high-signal keywords and tags
+    - query_parts: {"title_keywords": [...], "summary_keywords": [...], "constraint_keywords": [...], "tags": [...], "key_ideas": [...]}
+    - must_tags: tags that must be present
+    - should_tags: tags that are helpful
+    - avoid_tags: tags that are misleading
+    - rationale: 1–2 sentences describing how the query aligns to the stored card fields
 
-Modes:
-- If mode == "solution_guided":
-    * Prefer solution_tags as must_tags (high precision).
-    * Use problem title/summary/constraints as supporting keywords only.
-    * Use solution_invariants/solution_pitfalls ONLY as key_ideas keywords, not as must_tags.
-    * Use solution time/space complexity as constraint_keywords when helpful.
-- If mode == "problem_only":
-    * Infer tags from the problem and be conservative with must_tags.
-    * Use constraints and summary to choose high-signal keywords.
+    Modes:
+    - If mode == "solution_guided":
+        * Prefer solution_tags as must_tags (high precision).
+        * Use problem title/summary/constraints as supporting keywords only.
+        * Use solution_invariants/solution_pitfalls ONLY as key_ideas keywords, not as must_tags.
+        * Use solution time/space complexity as constraint_keywords when helpful.
+    - If mode == "problem_only":
+        * Infer tags from the problem and be conservative with must_tags.
+        * Use constraints and summary to choose high-signal keywords.
 
-General rules:
-- Do NOT propose a solution.
-- Keep must_tags short (0–3 items) and high precision.
-- Output must follow the schema exactly.
-""".strip()
+    General rules:
+    - Do NOT propose a solution.
+    - Keep must_tags short (0–3 items) and high precision.
+    - Output must follow the schema exactly.
+    """.strip()
 
     inv_sample = solution_invariants[:4]
     pit_sample = solution_pitfalls[:4]
 
     user_prompt = f"""
-Mode: {mode}
+    Mode: {mode}
 
-Problem title: {title}
-Problem summary: {summary}
-Problem constraints: {json.dumps(constraints, ensure_ascii=False)}
-Problem-derived candidate tags: {problem_tags}
+    Problem title: {title}
+    Problem summary: {summary}
+    Problem constraints: {json.dumps(constraints, ensure_ascii=False)}
+    Problem-derived candidate tags: {problem_tags}
 
-{"Solution strategy: " + solution_strategy if use_solution and solution_strategy else ""}
-{"Solution tags: " + ", ".join(solution_tags) if use_solution and solution_tags else ""}
-{"Solution time complexity: " + solution_time if use_solution and solution_time else ""}
-{"Solution space complexity: " + solution_space if use_solution and solution_space else ""}
-{"Solution invariants: " + "; ".join(inv_sample) if use_solution and inv_sample else ""}
-{"Solution pitfalls: " + "; ".join(pit_sample) if use_solution and pit_sample else ""}
-""".strip()
+    {"Solution strategy: " + solution_strategy if use_solution and solution_strategy else ""}
+    {"Solution tags: " + ", ".join(solution_tags) if use_solution and solution_tags else ""}
+    {"Solution time complexity: " + solution_time if use_solution and solution_time else ""}
+    {"Solution space complexity: " + solution_space if use_solution and solution_space else ""}
+    {"Solution invariants: " + "; ".join(inv_sample) if use_solution and inv_sample else ""}
+    {"Solution pitfalls: " + "; ".join(pit_sample) if use_solution and pit_sample else ""}
+    """.strip()
 
     structured_llm = llm.with_structured_output(RetrievalQueryOutput)
     resp = structured_llm.invoke([("system", SYSTEM), ("user", user_prompt)])
@@ -298,48 +298,48 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
     if has_known_solution:
         system_prompt = """
-You are a routing/verification judge.
+        You are a routing/verification judge.
 
-Goal: Decide whether we need MORE retrieval to deliver a correct and optimal answer.
+        Goal: Decide whether we need MORE retrieval to deliver a correct and optimal answer.
 
-Key rule:
-- If an authoritative solution is present, DO NOT require missing algorithms/KB chunks.
-- Mark sufficient=true unless the solution appears incorrect, incomplete, or non-optimal for the given constraints.
+        Key rule:
+        - If an authoritative solution is present, DO NOT require missing algorithms/KB chunks.
+        - Mark sufficient=true unless the solution appears incorrect, incomplete, or non-optimal for the given constraints.
 
-Return ONLY JSON with:
-- sufficient: true/false
-- missing_concepts: list (ONLY items that block correctness/optimality)
-- missing_algorithms: list (ONLY if necessary to fix the solution)
-- recommended_followup_queries: list (ONLY if sufficient=false)
-- rationale: 1-2 sentences
-""".strip()
+        Return ONLY JSON with:
+        - sufficient: true/false
+        - missing_concepts: list (ONLY items that block correctness/optimality)
+        - missing_algorithms: list (ONLY if necessary to fix the solution)
+        - recommended_followup_queries: list (ONLY if sufficient=false)
+        - rationale: 1-2 sentences
+        """.strip()
 
         user_prompt = f"""
-Problem metadata: {json.dumps(md, ensure_ascii=False)}
-Problem description: {json.dumps(pd, ensure_ascii=False)}
-Solution analysis: {json.dumps(sa, ensure_ascii=False)}
-LeetCode solution code (truncated): {leetcode_solution_code[:2000]}
-Retrieved chunks (optional): {json.dumps(condensed_results[:5], ensure_ascii=False)}
-""".strip()
+        Problem metadata: {json.dumps(md, ensure_ascii=False)}
+        Problem description: {json.dumps(pd, ensure_ascii=False)}
+        Solution analysis: {json.dumps(sa, ensure_ascii=False)}
+        LeetCode solution code (truncated): {leetcode_solution_code[:2000]}
+        Retrieved chunks (optional): {json.dumps(condensed_results[:5], ensure_ascii=False)}
+        """.strip()
 
     else:
         system_prompt = """
-You are evaluating whether retrieved knowledge chunks contain enough relevant concepts and algorithms
-to solve the problem in an optimal way.
+        You are evaluating whether retrieved knowledge chunks contain enough relevant concepts and algorithms
+        to solve the problem in an optimal way.
 
-Return ONLY JSON with:
-- sufficient: true/false
-- missing_concepts: list of missing concepts REQUIRED for a correct/optimal solution
-- missing_algorithms: list of missing algorithms REQUIRED
-- recommended_followup_queries: list of short search queries to retrieve missing items
-- rationale: 1-2 sentences
-""".strip()
+        Return ONLY JSON with:
+        - sufficient: true/false
+        - missing_concepts: list of missing concepts REQUIRED for a correct/optimal solution
+        - missing_algorithms: list of missing algorithms REQUIRED
+        - recommended_followup_queries: list of short search queries to retrieve missing items
+        - rationale: 1-2 sentences
+        """.strip()
 
         user_prompt = f"""
-Problem metadata: {json.dumps(md, ensure_ascii=False)}
-Problem description: {json.dumps(pd, ensure_ascii=False)}
-Retrieved chunks: {json.dumps(condensed_results, ensure_ascii=False)}
-""".strip()
+        Problem metadata: {json.dumps(md, ensure_ascii=False)}
+        Problem description: {json.dumps(pd, ensure_ascii=False)}
+        Retrieved chunks: {json.dumps(condensed_results, ensure_ascii=False)}
+        """.strip()
 
     structured_llm = llm.with_structured_output(RetrievalAssessmentOutput)
     resp = structured_llm.invoke([("system", system_prompt), ("user", user_prompt)])

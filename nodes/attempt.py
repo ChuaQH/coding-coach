@@ -15,23 +15,20 @@ def get_attempt_node(state: CoachState) -> Dict[str, Any]:
       {"code": "...python...", "notes": "..."}
     """
 
-    payload = interrupt(
-        {
-            "message": (
-                "Paste your Python solution attempt + brief notes. "
-                "Commands: '/done' to finish, '/answer' for a full solution, '/retry' to re-enter your code. "
-                "Use 'stuck' in notes if you want a higher hint level. "
-                "Otherwise, write a question about the problem or your solution."
-            ),
-            "expected_schema": {"code": "str (python)", "notes": "str"},
-            "hint_level": state.get("hint_level", 0),
-            # Use your existing state fields (your state doesn't define 'problem')
-            "problem": {
-                "metadata": state.get("problem_metadata", {}),
-                "description": state.get("problem_description", {}),
-            },
-        }
-    )
+    payload = interrupt({
+        "message": (
+            "Paste your Python solution attempt + brief notes. "
+            "Commands: '/done' to finish, '/answer' for a full solution, '/retry' to re-enter your code. "
+            "Use 'stuck' in notes if you want a higher hint level. "
+            "Otherwise, write a question about the problem or your solution."
+        ),
+        "expected_schema": {"code": "str (python)", "notes": "str"},
+        "hint_level": state.get("hint_level", 0),
+        "problem": {
+            "metadata": state.get("problem_metadata", {}),
+            "description": state.get("problem_description", {}),
+        },
+    })
 
     code = (payload.get("code") or "").strip()
     notes = (payload.get("notes") or "").strip()
