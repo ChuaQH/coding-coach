@@ -13,7 +13,7 @@ from utils.logging import log_stage
 
 
 def should_continue_retrieval(state: Dict[str, Any]) -> bool:
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    ret = retrieval_state(state)  
     assessment = ret.assessment or {}
     if assessment.get("sufficient", True):
         return False
@@ -34,8 +34,8 @@ def should_continue_retrieval(state: Dict[str, Any]) -> bool:
 
 
 def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    prob = problem_state(state)  # type: ignore[arg-type]
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    prob = problem_state(state)  
+    ret = retrieval_state(state)  
 
     md = prob.metadata or {}
     pd = prob.description or {}
@@ -113,7 +113,7 @@ def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def validate_retrieval_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    ret = retrieval_state(state)  
     rq = ret.query or {}
 
     must_tags = rq.get("must_tags") or []
@@ -121,6 +121,7 @@ def validate_retrieval_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
     avoid_tags = rq.get("avoid_tags") or []
     log_stage("validate_retrieval_tags", "input", {"must": must_tags, "should": should_tags, "avoid": avoid_tags})
 
+    # Filter out any missing tags that do not have exact match
     must_exp, must_missing = expand_exact(must_tags)
     should_exp, should_missing = expand_exact(should_tags)
     avoid_exp, avoid_missing = expand_exact(avoid_tags)
@@ -137,7 +138,7 @@ def validate_retrieval_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def resolve_missing_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    ret = retrieval_state(state)
     rq = ret.query or {}
     missing = ret.missing_tags or []
     if not missing:
@@ -163,6 +164,7 @@ def resolve_missing_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
     for raw_tag, info in (resolved.get("resolution") or {}).items():
         chosen = [t for t in (info.get("chosen") or []) if t in VOCAB_SET]
+        # Sort tags based on where it originally came from
         if raw_tag in orig_must:
             for t in chosen:
                 must_set.add(t)
@@ -187,7 +189,7 @@ def resolve_missing_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def retrieve_algo_kb_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    ret = retrieval_state(state)  
     rq = ret.query or {}
 
     base_query = (rq.get("query") or "").strip()
@@ -261,8 +263,8 @@ def retrieve_algo_kb_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    prob = problem_state(state)  # type: ignore[arg-type]
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    prob = problem_state(state)  
+    ret = retrieval_state(state)  
 
     md = prob.metadata or {}
     pd = prob.description or {}
@@ -358,7 +360,7 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def plan_next_retrieval_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    ret = retrieval_state(state)  
     assessment = ret.assessment or {}
     rq = ret.query or {}
 
@@ -385,7 +387,7 @@ def plan_next_retrieval_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def update_retrieval_counters_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    ret = retrieval_state(state)  
     c = ret.counters
 
     c.retrieval_round += 1
@@ -403,7 +405,7 @@ def update_retrieval_counters_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def mark_kb_insufficient_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    ret = retrieval_state(state)  # type: ignore[arg-type]
+    ret = retrieval_state(state)  
     assessment = ret.assessment or {}
     ret.kb_insufficient = not bool(assessment.get("sufficient", True))
     return {"retrieval": ret.model_dump()}

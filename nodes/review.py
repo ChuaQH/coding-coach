@@ -142,10 +142,10 @@ def review_node_factory() -> Any:
         return BASE_SYSTEM + "\n\n" + level_overlay(hint_level)
 
     def review_node(state: Dict[str, Any]) -> Dict[str, Any]:
-        prob = problem_state(state)      # type: ignore[arg-type]
-        ret = retrieval_state(state)     # type: ignore[arg-type]
-        sess = session_state(state)      # type: ignore[arg-type]
-        sty = style_state(state)         # type: ignore[arg-type]
+        prob = problem_state(state)      
+        ret = retrieval_state(state)     
+        sess = session_state(state)      
+        sty = style_state(state)         
 
         attempt = (sess.attempts or [])[-1] if sess.attempts else {}
         code = (attempt.get("code") or "").strip()

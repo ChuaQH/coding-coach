@@ -60,7 +60,7 @@ def build_graph() -> Any:
     g.add_edge("resolve_problem_description", "fetch_leetcode_solution")
 
     def route_after_solution_fetch(state: dict) -> str:
-        prob = problem_state(state)  # type: ignore[arg-type]
+        prob = problem_state(state)  
         code = (prob.leetcode_solution_code or "").strip()
         return "resolve_leetcode_solution" if code else "generate_retrieval_query"
 
@@ -74,7 +74,7 @@ def build_graph() -> Any:
     g.add_edge("generate_retrieval_query", "validate_retrieval_tags")
 
     def route_after_validate(state: dict) -> str:
-        ret = retrieval_state(state)  # type: ignore[arg-type]
+        ret = retrieval_state(state)  
         return "resolve_missing_tags" if ret.needs_tag_resolution else "retrieve_algo_kb"
 
     g.add_conditional_edges(

@@ -1,10 +1,7 @@
-# helpers/fuzzy_helper.py
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
-
 from rapidfuzz import fuzz, process
 
 def tag_processor(s: str) -> str:
@@ -13,7 +10,6 @@ def tag_processor(s: str) -> str:
     s = re.sub(r"\s+", " ", s)
     return s
 
-@dataclass(frozen=True)
 class TagCandidate:
     tag: str
     score: float
@@ -22,7 +18,6 @@ class RapidFuzzTagResolver:
     def __init__(self, vocab_tags: List[str]) -> None:
         self.vocab_tags = list(vocab_tags)
 
-        # IMPORTANT: processed -> list of canonicals (not 1)
         self._proc_to_canonicals: Dict[str, List[str]] = {}
         for t in self.vocab_tags:
             p = tag_processor(t)
@@ -38,10 +33,6 @@ class RapidFuzzTagResolver:
         close_min_score: float = 95.0,
         scorer=fuzz.WRatio,
     ) -> Dict[str, Any]:
-        """
-        include_close_delta: include extra candidates whose score is within this delta from top score.
-        close_min_score: only do the “include extra” behavior when top score is at least this high.
-        """
         p = tag_processor(proposed)
         if not p:
             return {"proposed": proposed, "status": "unresolved", "chosen": [], "candidates": []}
@@ -49,12 +40,12 @@ class RapidFuzzTagResolver:
         # Exact match by normalized form -> return ALL canonicals with same processed form
         if p in self._proc_to_canonicals:
             canonicals = self._proc_to_canonicals[p]
-            # If there are duplicates in vocab (unlikely), dedupe
+            # Remove all duplicates
             canonicals = list(dict.fromkeys(canonicals))
             return {
                 "proposed": proposed,
                 "status": "exact",
-                "chosen": canonicals,  # <-- list
+                "chosen": canonicals,
                 "candidates": [{"tag": t, "score": 100.0} for t in canonicals],
             }
 
@@ -63,7 +54,7 @@ class RapidFuzzTagResolver:
             self.vocab_tags,
             scorer=scorer,
             processor=tag_processor,
-            limit=max(top_n, 10),  # fetch a bit more for close-delta inclusion
+            limit=max(top_n, 10),
         )
 
         # Filter by min_score
@@ -95,7 +86,7 @@ class RapidFuzzTagResolver:
         return {
             "proposed": proposed,
             "status": "fuzzy",
-            "chosen": chosen,       # <-- list
+            "chosen": chosen,
             "candidates": candidates,
         }
 

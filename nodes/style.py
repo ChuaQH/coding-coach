@@ -8,8 +8,8 @@ from utils.style_bundle import compute_style_bundle
 
 
 def pep_ruff_mypy_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    sess = session_state(state)  # type: ignore[arg-type]
-    sty = style_state(state)     # type: ignore[arg-type]
+    sess = session_state(state)  
+    sty = style_state(state)     
 
     latest_attempt = (sess.attempts or [])[-1] if sess.attempts else {}
     if not latest_attempt:

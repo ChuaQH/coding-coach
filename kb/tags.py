@@ -27,7 +27,6 @@ def normalize_to_vocab_exact(tag: str) -> List[str]:
 
 
 def tag_key(tag: str) -> str:
-    # IMPORTANT: tag names must match vocab strings exactly
     return f"tag__{tag}"
 
 
@@ -48,5 +47,5 @@ def expand_exact(tags: List[str]) -> Tuple[List[str], List[str]]:
             expanded.extend(exacts)
         else:
             missing.append(t)
-    expanded = list(dict.fromkeys(expanded))  # de-dupe, preserve order
+    expanded = list(dict.fromkeys(expanded))
     return expanded, missing
