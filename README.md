@@ -73,6 +73,11 @@ An agentic coding coach designed to help users learn problem-solving and program
         - meta
             - The user is asking about the review process or your previous feedback, or the question is unclear / not about the code itself.
 
+9. **Solution Ingestion (When there is an existing solution)**
+    - If a known solution is present, distill it into reusable knowledge chunks
+    - Chunks are algorithmic patterns with title, tags, complexity, pitfalls, and snippets
+    - Problem title fields are redacted before prompting to avoid leakage into chunk titles
+    - Inserts the resulting documents into the persistent Chroma knowledge base for future retrieval
 ---
 
 ## LangGraph Architecture
@@ -103,6 +108,9 @@ An agentic coding coach designed to help users learn problem-solving and program
     - `followup_question` (conditional)
     - loop until `/done`
 
+- **Solution Ingestion (Optional - When there is existing solution)**
+    - `solution_knowledge_ingest`
+
 ## Current data used
 ### Vector Store
 - Persistent Chroma db
@@ -123,6 +131,7 @@ An agentic coding coach designed to help users learn problem-solving and program
             - Source platform and source URL (when available)
         - Embedded as rich text for semantic similarity search
         - Include boolean tag flags to support tag-based queries
+    - Updated at the end of each run with knowledge chunks (document) when an existing solution is present
 - In-Memory Vector Store
     - Populated with ```PEP8``` and ```PEP257``` documents
         - Source HTML is parsed and segmented into semantically meaningful sections based on document headers (h1–h3)
@@ -194,6 +203,10 @@ $env:OLLAMA_EMBED_MODEL="nomic-embed-text"
 Run (CLI) from repo root:
 ```bash
 python .\cli.py
+```
+Run (CLI) with debug logging from repo root:
+```bash
+python .\cli.py --debug
 ```
 ### Commands during a session
 - /hint N, set hint level (0–5)
