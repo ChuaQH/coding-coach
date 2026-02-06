@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 from typing import Any
-
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
-
 from state_models import CoachState
 from nodes.problem import (
     fetch_leetcode_solution_node,
@@ -15,11 +13,10 @@ from nodes.problem import (
 from nodes.retrieval import (
     assess_retrieval_coverage_node,
     generate_retrieval_query_node,
-    mark_kb_insufficient_node,
     plan_next_retrieval_node,
     retrieve_algo_kb_node,
     should_continue_retrieval,
-    update_retrieval_counters_node,
+    set_kb_sufficiency_flag_node,
     validate_retrieval_tags_node,
     resolve_missing_tags_node,
 )
@@ -45,10 +42,9 @@ def build_graph() -> Any:
     g.add_node("validate_retrieval_tags", validate_retrieval_tags_node)
     g.add_node("resolve_missing_tags", resolve_missing_tags_node)
     g.add_node("retrieve_algo_kb", retrieve_algo_kb_node)
-    g.add_node("update_retrieval_counters", update_retrieval_counters_node)
     g.add_node("assess_retrieval_coverage", assess_retrieval_coverage_node)
     g.add_node("plan_next_retrieval", plan_next_retrieval_node)
-    g.add_node("mark_kb_insufficient", mark_kb_insufficient_node)
+    g.add_node("set_kb_sufficiency_flag", set_kb_sufficiency_flag_node)
     g.add_node("get_attempt", get_attempt_node)
     g.add_node("pep_ruff_mypy", pep_ruff_mypy_node)
     g.add_node("review", review_node)
@@ -84,20 +80,19 @@ def build_graph() -> Any:
     )
 
     g.add_edge("resolve_missing_tags", "retrieve_algo_kb")
-    g.add_edge("retrieve_algo_kb", "update_retrieval_counters")
-    g.add_edge("update_retrieval_counters", "assess_retrieval_coverage")
+    g.add_edge("retrieve_algo_kb", "assess_retrieval_coverage")
 
     def route_after_assess(state: dict) -> str:
-        return "plan_next_retrieval" if should_continue_retrieval(state) else "mark_kb_insufficient"
+        return "plan_next_retrieval" if should_continue_retrieval(state) else "set_kb_sufficiency_flag"
 
     g.add_conditional_edges(
         "assess_retrieval_coverage",
         route_after_assess,
-        {"plan_next_retrieval": "plan_next_retrieval", "mark_kb_insufficient": "mark_kb_insufficient"},
+        {"plan_next_retrieval": "plan_next_retrieval", "set_kb_sufficiency_flag": "set_kb_sufficiency_flag"},
     )
 
     g.add_edge("plan_next_retrieval", "validate_retrieval_tags")
-    g.add_edge("mark_kb_insufficient", "get_attempt")
+    g.add_edge("set_kb_sufficiency_flag", "get_attempt")
     g.add_edge("get_attempt", "pep_ruff_mypy")
     g.add_edge("pep_ruff_mypy", "review")
     g.add_edge("review", "decide")

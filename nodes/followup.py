@@ -3,16 +3,14 @@ from __future__ import annotations
 import json
 import re
 from typing import Any, Dict
-
 from helpers.pep_helper import compact_pep_context, render_ruff_report_md, summarize_ruff
-
 from resources import llm
 from state_access import followup_state, problem_state, retrieval_state, session_state, style_state
 from utils.logging import log_stage
 from utils.style_bundle import compute_style_bundle
 from utils.text_format import compact_kb_cards, extract_code_excerpt, truncate_text
 
-
+# Handle follow-up question from user
 def followup_question_node_factory() -> Any:
     INTENT_SYSTEM = """
         You are an intent classifier for follow-up questions about code review.
@@ -22,6 +20,7 @@ def followup_question_node_factory() -> Any:
         Output only the single word.
     """
 
+    # Function to classify intent
     def classify_intent(question: str, last_feedback: str = "") -> str:
         prompt = f"<question>\n{question.strip()}\n</question>\n"
         if last_feedback:
@@ -41,6 +40,7 @@ def followup_question_node_factory() -> Any:
         Keep the response short and structured.
     """
 
+    # Function to build system prompt based on hint level
     def build_system(hint_level: int) -> str:
         if hint_level <= 2:
             overlay = """
@@ -88,7 +88,7 @@ def followup_question_node_factory() -> Any:
                 - <ONE next step>
 
                 ## PATCH / SKELETON (optional)
-                - <<= 25 lines>
+                - <= 25 lines>
 
                 ## QUESTIONS
                 - <0–2 or (none)>
@@ -117,6 +117,7 @@ def followup_question_node_factory() -> Any:
             """
         return BASE_SYSTEM + "\n" + overlay
 
+    # The main follow-up question node function
     def followup_question_node(state: Dict[str, Any]) -> Dict[str, Any]:
         prob = problem_state(state)      
         ret = retrieval_state(state)     
@@ -136,7 +137,7 @@ def followup_question_node_factory() -> Any:
         last_feedback_excerpt = truncate_text(sess.last_feedback, 600) if refers_to_prior else ""
 
         intent = classify_intent(question, last_feedback_excerpt)
-        fol.followup_intent = intent  # record
+        fol.followup_intent = intent
 
         attempt = (sess.attempts or [{}])[-1] if sess.attempts else {}
         code_full = (attempt.get("code") or "").strip()
@@ -148,7 +149,7 @@ def followup_question_node_factory() -> Any:
         pep_context = ""
 
         if intent == "style":
-            # ensure style exists else compute if missing
+            # Ensure style exists else compute if missing
             if code_full and (sty.ruff_json == [] and not sty.ruff_format_diff and not sty.mypy_stdout and not sty.pep_context):
                 ruff_json, ruff_format_diff, mypy_stdout, pep_context = compute_style_bundle(
                     code_full,
@@ -169,7 +170,7 @@ def followup_question_node_factory() -> Any:
         retrieval_cards = ""
         retrieval_assessment = ""
         if intent == "correctness":
-            # include retrieval only if it’s currently being used and has results
+            # Include retrieval only if it’s currently being used and has results
             if ret.results and (ret.assessment):
                 retrieval_cards = compact_kb_cards(ret.results)
                 retrieval_assessment = json.dumps(ret.assessment, ensure_ascii=False)
@@ -195,7 +196,7 @@ def followup_question_node_factory() -> Any:
         </user_notes>
         
         <user_code>
-        {extract_code_excerpt(code_full)}
+        {code_full}
         </user_code>
 
         <problem_metadata>

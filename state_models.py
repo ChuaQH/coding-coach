@@ -1,13 +1,9 @@
 from __future__ import annotations
 
 from typing import Any, Dict, List, Literal, Optional, TypedDict
-
 from pydantic import BaseModel, Field, field_validator
 
-
-# -------------------------
-# LLM structured outputs
-# -------------------------
+# Pydantic models for various state components
 
 class ProblemMetadataModel(BaseModel):
     normalized_question_title: str = ""
@@ -58,10 +54,6 @@ class RetrievalAssessmentOutput(BaseModel):
     rationale: str
 
 
-# -------------------------
-# State submodels (stored as dicts in LangGraph state)
-# -------------------------
-
 class RetrievalCountersModel(BaseModel):
     retrieval_round: int = 0
     max_retrieval_rounds: int = 4
@@ -75,8 +67,6 @@ class RetrievalCountersModel(BaseModel):
 class ProblemStateModel(BaseModel):
     user_question_title: str = ""
     user_question_description: str = ""
-
-    # store dumps only
     metadata: Dict[str, Any] = Field(default_factory=dict)
     description: Dict[str, Any] = Field(default_factory=dict)
     leetcode_solution_code: str = ""
@@ -126,10 +116,6 @@ class SessionStateModel(BaseModel):
     mypy_ignore_missing_imports: bool = False
 
 
-# -------------------------
-# LangGraph state (grouped blobs)
-# -------------------------
-
 class CoachState(TypedDict, total=False):
     problem: Dict[str, Any]
     retrieval: Dict[str, Any]
@@ -137,5 +123,4 @@ class CoachState(TypedDict, total=False):
     followup: Dict[str, Any]
     session: Dict[str, Any]
 
-    # internal handles (not serialized across processes)
     _vs: Any

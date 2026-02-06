@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 from typing import Any, Dict, Literal
-
 from langgraph.types import interrupt
-
 from state_access import followup_state, problem_state, session_state
 from utils.logging import log_stage
 
-
+# Node to decide next action based on user command
 def decide_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
     Loop control:
@@ -72,7 +70,7 @@ def decide_node(state: Dict[str, Any]) -> Dict[str, Any]:
     fol.followup_question = raw
     return {"session": sess.model_dump(), "followup": fol.model_dump()}
 
-
+# Routing function for decide node
 def route_next(state: Dict[str, Any]) -> Literal["continue", "end", "followup", "review"]:
     sess = session_state(state)       
     fol = followup_state(state)       

@@ -11,7 +11,7 @@ from utils.logging import log_stage
 from utils.style_bundle import compute_style_bundle
 from utils.text_format import compact_kb_cards
 
-
+# Handle review of user's code attempt
 def review_node_factory() -> Any:
     BASE_SYSTEM = """You are a Python interview coding coach reviewing a candidate's solution attempt.
 
@@ -66,9 +66,10 @@ def review_node_factory() -> Any:
     - <0–3 bullets; include typing/docstring best practices only if relevant to this code>
     """.strip()
 
-    def level_overlay(hint_level: int) -> str:
+    # Function to build system prompt based on hint level
+    def build_system(hint_level: int) -> str:
         if hint_level <= 2:
-            return f"""
+            overlay = f"""
             Hint policy:
             - hint_level 0–2: NO code blocks. hint_level 2 may name a strategy + invariant, no pseudocode.
 
@@ -82,7 +83,7 @@ def review_node_factory() -> Any:
             """.strip()
 
         if hint_level == 3:
-            return f"""
+            overlay = f"""
             Hint policy:
             - hint_level 3: Provide PSEUDOCODE ONLY (no real code, no ```python blocks).
 
@@ -100,7 +101,7 @@ def review_node_factory() -> Any:
             """.strip()
 
         if hint_level == 4:
-            return f"""
+            overlay = f"""
             Hint policy:
             - hint_level 4: Provide ONE small PATCH/SKELETON code block (<= 25 lines), not full end-to-end.
 
@@ -118,29 +119,30 @@ def review_node_factory() -> Any:
             - <2–4 targeted diagnostic questions>
             """.strip()
 
-        return f"""
-        Hint policy:
-        - hint_level 5: MUST provide full working solution code + explanation + complexity + edge cases.
+        else:
+            overlay = f"""
+            Hint policy:
+            - hint_level 5: MUST provide full working solution code + explanation + complexity + edge cases.
 
-        {OUTPUT_COMMON}
+            {OUTPUT_COMMON}
 
-        ## 4) DELIVERABLE
-        ### SOLUTION
-        - <full working solution>
+            ## 4) DELIVERABLE
+            ### SOLUTION
+            - <full working solution>
 
-        ### Explanation
-        - <1–3 bullets explaining the solution>
+            ### Explanation
+            - <1–3 bullets explaining the solution>
 
-        ### Complexity
-        - Time: <...>  Space: <...>
+            ### Complexity
+            - Time: <...>  Space: <...>
 
-        ### Edge cases
-        - <list of important edge cases handled>
-        """.strip()
+            ### Edge cases
+            - <list of important edge cases handled>
+            """.strip()
 
-    def build_system(hint_level: int) -> str:
-        return BASE_SYSTEM + "\n\n" + level_overlay(hint_level)
+        return BASE_SYSTEM + "\n\n" + overlay
 
+    # The review node function
     def review_node(state: Dict[str, Any]) -> Dict[str, Any]:
         prob = problem_state(state)      
         ret = retrieval_state(state)     
@@ -152,7 +154,7 @@ def review_node_factory() -> Any:
         notes = (attempt.get("notes") or "").strip()
         hint_level = int(sess.hint_level)
 
-        # Ensure style bundle exists (review depends on it)
+        # Ensure style bundle exists
         if code and (sty.ruff_json == [] and not sty.ruff_format_diff and not sty.mypy_stdout and not sty.pep_context):
             ruff_json, ruff_format_diff, mypy_stdout, pep_context = compute_style_bundle(
                 code,

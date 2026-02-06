@@ -72,7 +72,7 @@ def main() -> None:
             command = input(f"Current hint level: {current_hint_level}\nCommand (/done, /answer, /retry, /hint N, or a question): ").strip()
             payload = {"command": command}
         else:
-            print("\nPaste Python code; finish with a line containing only: ```END```")
+            print("\nPaste Python code, finish with a line containing only: ```END```")
             lines: List[str] = []
             while True:
                 line = input()
@@ -93,7 +93,6 @@ def main() -> None:
 
             # Debug-only trace
             log_stage("feedback_debug", None, {"chars": len(sess.last_feedback)})
-
 
     log_stage("main", "session complete")
 

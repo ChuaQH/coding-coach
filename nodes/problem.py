@@ -10,7 +10,7 @@ from state_access import problem_state, session_state
 from state_models import ProblemDescriptionModel, ProblemMetadataModel, SolutionAnalysisModel
 from utils.logging import log_stage
 
-
+# Node to resolve problem metadata
 def resolve_problem_metadata_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob = problem_state(state)  
     sess = session_state(state)  
@@ -47,7 +47,7 @@ def resolve_problem_metadata_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob.metadata = md
     return {"problem": prob.model_dump(), "session": sess.model_dump()}
 
-
+# Node to resolve problem description
 def resolve_problem_description_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob = problem_state(state)  
     description = prob.user_question_description.strip()
@@ -80,7 +80,7 @@ def resolve_problem_description_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob.description = pd
     return {"problem": prob.model_dump()}
 
-
+# Node to fetch LeetCode solution code (from LeetCode-Solutions repo by kamyu104)
 def fetch_leetcode_solution_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob = problem_state(state)  
     md = prob.metadata or {}
@@ -112,7 +112,7 @@ def fetch_leetcode_solution_node(state: Dict[str, Any]) -> Dict[str, Any]:
         log_stage("fetch_leetcode_solution", "error fetching solution (id)", {"error": str(e)})
         return {}
 
-
+# Node to analyze LeetCode solution code
 def resolve_leetcode_solution_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob = problem_state(state)  
     code = (prob.leetcode_solution_code or "").strip()

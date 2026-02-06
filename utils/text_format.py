@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from typing import Any, Dict, List
 
-
+# Format CLI feedback into structured sections
 def format_cli_feedback(text: str) -> str:
     if not text:
         return ""
@@ -87,7 +87,7 @@ def format_cli_feedback(text: str) -> str:
             rendered.extend(render_block(title, sections.get(key, [])))
         return "\n".join(rendered).strip()
 
-    # fallback
+    # Fallback for unstructured feedback
     import textwrap
     paragraphs = [p.strip() for p in raw.split("\n\n") if p.strip()]
     out: List[str] = ["FEEDBACK"]
@@ -96,7 +96,7 @@ def format_cli_feedback(text: str) -> str:
             out.append(f"  - {w}")
     return "\n".join(out).strip()
 
-
+# Compact knowledge base cards into JSON string
 def compact_kb_cards(retrieval_results: List[Dict[str, Any]], max_chars: int = 600) -> str:
     cards = []
     for r in (retrieval_results or [])[:4]:
@@ -108,18 +108,9 @@ def compact_kb_cards(retrieval_results: List[Dict[str, Any]], max_chars: int = 6
         cards.append({"title": title, "tags": tags, "snippet": snippet})
     return json.dumps(cards, ensure_ascii=False)
 
-
+# Truncate text to a maximum number of characters
 def truncate_text(s: str, max_chars: int = 1400) -> str:
     if not s:
         return ""
     s = s.strip()
     return s if len(s) <= max_chars else (s[:max_chars] + "\n... (truncated) ...")
-
-
-def extract_code_excerpt(code: str, max_lines: int = 180) -> str:
-    if not code:
-        return ""
-    lines = code.splitlines()
-    if len(lines) <= max_lines:
-        return code
-    return "\n".join(lines[:max_lines] + ["# ... (truncated) ..."])

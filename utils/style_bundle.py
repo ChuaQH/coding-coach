@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 from typing import Any, Dict, List, Tuple
-
 from helpers.linting_helper import run_mypy_stdout, run_ruff_outputs
 from helpers.pep_helper import build_pep_queries_from_findings, query_pep_kb
-
 from kb.pep_kb import get_in_memory_vector_store
 
-
+# Compute style bundle: Ruff JSON + formatter diff, MyPy stdout, PEP context
 def compute_style_bundle(
     code: str,
     *,

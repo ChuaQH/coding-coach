@@ -4,14 +4,14 @@ import json
 from typing import Any, Dict, List, Literal, Tuple
 
 from langchain_core.documents import Document
-
+from copy import copy
 from resources import llm, vector_store
 from kb.tags import VOCAB_SET, TAG_RESOLVER, build_must_filter, expand_exact, tag_key
-from state_access import problem_state, retrieval_state, shallow_copy_dict
+from state_access import problem_state, retrieval_state
 from state_models import RetrievalAssessmentOutput, RetrievalQueryOutput
 from utils.logging import log_stage
 
-
+# Function to decide whether to continue retrieval
 def should_continue_retrieval(state: Dict[str, Any]) -> bool:
     ret = retrieval_state(state)  
     assessment = ret.assessment or {}
@@ -32,7 +32,7 @@ def should_continue_retrieval(state: Dict[str, Any]) -> bool:
 
     return True
 
-
+# Node to generate kb retrieval query
 def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob = problem_state(state)  
     ret = retrieval_state(state)  
@@ -108,10 +108,10 @@ def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     rq = resp.model_dump()
 
     ret.query = rq
-    ret.original_query = shallow_copy_dict(rq)
+    ret.original_query = copy(rq)
     return {"retrieval": ret.model_dump()}
 
-
+# Node to validate and expand retrieval tags
 def validate_retrieval_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret = retrieval_state(state)  
     rq = ret.query or {}
@@ -136,7 +136,7 @@ def validate_retrieval_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret.needs_tag_resolution = bool(missing_any)
     return {"retrieval": ret.model_dump()}
 
-
+# Node to resolve missing retrieval tags
 def resolve_missing_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret = retrieval_state(state)
     rq = ret.query or {}
@@ -187,7 +187,7 @@ def resolve_missing_tags_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret.tag_resolution = resolved
     return {"retrieval": ret.model_dump()}
 
-
+# Node to retrieve algorithm kb chunks
 def retrieve_algo_kb_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret = retrieval_state(state)  
     rq = ret.query or {}
@@ -259,9 +259,22 @@ def retrieve_algo_kb_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret.results = deduped
     ret.counters.last_retrieval_added = added
     ret.counters.last_retrieval_best_score = float(best_score)
+
+    c = ret.counters
+    c.retrieval_round += 1
+    added = int(c.last_retrieval_added)
+    best_score = float(c.last_retrieval_best_score)
+
+    weak = (best_score > 0 and best_score < 0.35)
+    if added == 0 or weak:
+        c.no_progress_rounds += 1
+    else:
+        c.no_progress_rounds = 0
+
+    ret.counters = c
     return {"retrieval": ret.model_dump()}
 
-
+# Node to assess retrieval coverage
 def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
     prob = problem_state(state)  
     ret = retrieval_state(state)  
@@ -358,7 +371,7 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret.assessment = assessment
     return {"retrieval": ret.model_dump()}
 
-
+# Node to plan next retrieval query
 def plan_next_retrieval_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret = retrieval_state(state)  
     assessment = ret.assessment or {}
@@ -385,26 +398,8 @@ def plan_next_retrieval_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret.counters.used_followup_queries = used
     return {"retrieval": ret.model_dump()}
 
-
-def update_retrieval_counters_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    ret = retrieval_state(state)  
-    c = ret.counters
-
-    c.retrieval_round += 1
-    added = int(c.last_retrieval_added)
-    best_score = float(c.last_retrieval_best_score)
-
-    weak = (best_score > 0 and best_score < 0.35)
-    if added == 0 or weak:
-        c.no_progress_rounds += 1
-    else:
-        c.no_progress_rounds = 0
-
-    ret.counters = c
-    return {"retrieval": ret.model_dump()}
-
-
-def mark_kb_insufficient_node(state: Dict[str, Any]) -> Dict[str, Any]:
+# Node to set knowledge base sufficiency flag after retrieval is done
+def set_kb_sufficiency_flag_node(state: Dict[str, Any]) -> Dict[str, Any]:
     ret = retrieval_state(state)  
     assessment = ret.assessment or {}
     ret.kb_insufficient = not bool(assessment.get("sufficient", True))
