@@ -109,9 +109,7 @@ class SessionStateModel(BaseModel):
     done: bool = False
     retry: bool = False
     force_review: bool = False
-
-    # preserved knobs from your old code
-    python_version: str = "3.11"
+    python_version: str = "3.10"
     mypy_strict: bool = False
     mypy_ignore_missing_imports: bool = False
 
@@ -122,5 +120,3 @@ class CoachState(TypedDict, total=False):
     style: Dict[str, Any]
     followup: Dict[str, Any]
     session: Dict[str, Any]
-
-    _vs: Any

@@ -25,6 +25,7 @@ from nodes.style import pep_ruff_mypy_node
 from nodes.flow import decide_node, route_next
 from nodes.followup import followup_question_node_factory
 from nodes.attempt import get_attempt_node
+from nodes.ingest import solution_knowledge_ingest_node
 from state_access import problem_state, retrieval_state
 
 
@@ -50,6 +51,7 @@ def build_graph() -> Any:
     g.add_node("review", review_node)
     g.add_node("decide", decide_node)
     g.add_node("followup_question", followup_node)
+    g.add_node("solution_knowledge_ingest_node", solution_knowledge_ingest_node)
 
     g.add_edge(START, "resolve_problem_metadata")
     g.add_edge("resolve_problem_metadata", "resolve_problem_description")
@@ -105,10 +107,11 @@ def build_graph() -> Any:
             "retry": "get_attempt",
             "followup": "followup_question",
             "review": "review",
-            "end": END,
+            "end": "solution_knowledge_ingest_node",
         },
     )
     g.add_edge("followup_question", "decide")
+    g.add_edge("solution_knowledge_ingest_node", END)
 
     checkpointer = InMemorySaver()
     return g.compile(checkpointer=checkpointer)

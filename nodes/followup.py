@@ -8,7 +8,7 @@ from resources import llm
 from state_access import followup_state, problem_state, retrieval_state, session_state, style_state
 from utils.logging import log_stage
 from utils.style_bundle import compute_style_bundle
-from utils.text_format import compact_kb_cards, extract_code_excerpt, truncate_text
+from utils.text_format import compact_kb_cards, truncate_text
 
 # Handle follow-up question from user
 def followup_question_node_factory() -> Any:

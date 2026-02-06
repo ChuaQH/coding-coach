@@ -82,7 +82,7 @@ def review_node_factory() -> Any:
             - <2–4 targeted diagnostic questions>
             """.strip()
 
-        if hint_level == 3:
+        elif hint_level == 3:
             overlay = f"""
             Hint policy:
             - hint_level 3: Provide PSEUDOCODE ONLY (no real code, no ```python blocks).
@@ -100,7 +100,7 @@ def review_node_factory() -> Any:
             - <2–4 targeted diagnostic questions>
             """.strip()
 
-        if hint_level == 4:
+        elif hint_level == 4:
             overlay = f"""
             Hint policy:
             - hint_level 4: Provide ONE small PATCH/SKELETON code block (<= 25 lines), not full end-to-end.
