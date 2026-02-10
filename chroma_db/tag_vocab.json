@@ -13,42 +13,14 @@
     ],
     "last_seen": "2026-01-26T12:49:54.425310+00:00"
   },
-  "ASCII": {
-    "count": 2,
-    "examples": [
-      "Simple Encoding and Decoding",
-      "Custom Uppercase Conversion"
-    ],
-    "last_seen": "2026-01-26T17:13:12.461437+00:00"
-  },
-  "Horner's method": {
-    "count": 1,
-    "examples": [
-      "Polynomial Evaluation"
-    ],
-    "last_seen": "2026-01-26T12:53:00.389132+00:00"
-  },
-  "SPD matrix": {
-    "count": 1,
-    "examples": [
-      "Conjugate Gradient Method"
-    ],
-    "last_seen": "2026-01-26T10:36:52.083689+00:00"
-  },
-  "a-star": {
+  "a_star": {
     "count": 2,
     "examples": [
       "Bidirectional A* Search",
-      "Multi-Heuristic A* Algorithm"
-    ],
-    "last_seen": "2026-01-24T23:13:47.678437+00:00"
-  },
-  "a_star": {
-    "count": 1,
-    "examples": [
+      "Multi-Heuristic A* Algorithm",
       "A* Search Algorithm"
     ],
-    "last_seen": "2026-01-24T12:05:56.233032+00:00"
+    "last_seen": "2026-01-24T23:13:47.678437+00:00"
   },
   "absolute_value": {
     "count": 1,
@@ -57,7 +29,7 @@
     ],
     "last_seen": "2026-01-26T10:58:47.490205+00:00"
   },
-  "abundant number": {
+  "abundant_number": {
     "count": 1,
     "examples": [
       "Weird Number Check"
@@ -72,7 +44,7 @@
     ],
     "last_seen": "2026-01-26T13:31:32.979026+00:00"
   },
-  "adaptive step size": {
+  "adaptive_step_size": {
     "count": 1,
     "examples": [
       "Runge-Kutta-Fehlberg 4(5)"
@@ -156,16 +128,18 @@
       "3Sum Problem",
       "2D Array Indexing",
       "Kth Largest Element in an Array",
-      "Largest Rectangle in Histogram"
+      "Largest Rectangle in Histogram",
+      "Find Median of Two Sorted Arrays"
     ],
     "last_seen": "2026-01-26T16:30:53.616010+00:00"
   },
-  "arrays": {
-    "count": 1,
+  "ascii": {
+    "count": 2,
     "examples": [
-      "Find Median of Two Sorted Arrays"
+      "Simple Encoding and Decoding",
+      "Custom Uppercase Conversion"
     ],
-    "last_seen": "2026-01-23T21:10:33.815520+00:00"
+    "last_seen": "2026-01-26T17:13:12.461437+00:00"
   },
   "ascii85": {
     "count": 1,
@@ -174,7 +148,7 @@
     ],
     "last_seen": "2026-01-23T08:11:26.678344+00:00"
   },
-  "automatic differentiation": {
+  "automatic_differentiation": {
     "count": 1,
     "examples": [
       "Dual Number Differentiation"
@@ -206,14 +180,6 @@
     ],
     "last_seen": "2026-01-26T16:35:46.097396+00:00"
   },
-  "base conversion": {
-    "count": 2,
-    "examples": [
-      "Decimal to Negative Base 2 Conversion",
-      "Harshad Numbers in Base Conversion"
-    ],
-    "last_seen": "2026-01-26T12:04:55.481608+00:00"
-  },
   "base16": {
     "count": 1,
     "examples": [
@@ -234,6 +200,14 @@
       "Base64 Encoding and Decoding"
     ],
     "last_seen": "2026-01-23T08:10:24.540394+00:00"
+  },
+  "base_conversion": {
+    "count": 2,
+    "examples": [
+      "Decimal to Negative Base 2 Conversion",
+      "Harshad Numbers in Base Conversion"
+    ],
+    "last_seen": "2026-01-26T12:04:55.481608+00:00"
   },
   "basic": {
     "count": 2,
@@ -279,53 +253,19 @@
     ],
     "last_seen": "2026-01-26T11:18:35.159149+00:00"
   },
-  "binary conversion": {
+  "binary_conversion": {
     "count": 1,
     "examples": [
       "Binary Coded Decimal (BCD)"
     ],
     "last_seen": "2026-01-23T03:11:02.086419+00:00"
   },
-  "binary exponentiation": {
+  "binary_exponentiation": {
     "count": 1,
     "examples": [
       "Binary Exponentiation for Modular Inverse"
     ],
     "last_seen": "2026-01-26T11:46:12.814631+00:00"
-  },
-  "binary operations": {
-    "count": 3,
-    "examples": [
-      "Binary Shifts in Python",
-      "Bit Manipulation Functions",
-      "AND Gate Implementation"
-    ],
-    "last_seen": "2026-01-23T04:00:15.352557+00:00"
-  },
-  "binary search": {
-    "count": 3,
-    "examples": [
-      "Bisection Method",
-      "Search in a Sorted Matrix"
-    ],
-    "last_seen": "2026-01-26T14:55:32.172208+00:00"
-  },
-  "binary search tree": {
-    "count": 1,
-    "examples": [
-      "Optimal Binary Search Tree (BST)"
-    ],
-    "last_seen": "2026-01-24T09:42:12.647473+00:00"
-  },
-  "binary tree": {
-    "count": 4,
-    "examples": [
-      "Binary Tree Mirror",
-      "Merge Two Binary Trees",
-      "Binary Tree Node",
-      "Skew Heap"
-    ],
-    "last_seen": "2026-01-24T00:07:01.999310+00:00"
   },
   "binary_indexed_tree": {
     "count": 1,
@@ -334,38 +274,53 @@
     ],
     "last_seen": "2026-01-23T16:33:39.356042+00:00"
   },
-  "binary_search": {
-    "count": 11,
+  "binary_operations": {
+    "count": 3,
     "examples": [
+      "Binary Shifts in Python",
+      "Bit Manipulation Functions",
+      "AND Gate Implementation"
+    ],
+    "last_seen": "2026-01-23T04:00:15.352557+00:00"
+  },
+  "binary_search": {
+    "count": 3,
+    "examples": [
+      "Bisection Method",
+      "Search in a Sorted Matrix",
       "Longest Increasing Subsequence (LIS)",
       "Integer Square Root",
       "Perfect Cube Check",
       "Perfect Square Check",
       "Binary Search"
     ],
-    "last_seen": "2026-01-26T16:15:38.828339+00:00"
+    "last_seen": "2026-01-26T14:55:32.172208+00:00"
   },
   "binary_search_tree": {
-    "count": 8,
+    "count": 1,
     "examples": [
+      "Optimal Binary Search Tree (BST)",
       "AVL Tree Implementation",
       "Binary Search Tree Implementation",
       "Binary Search Tree Floor and Ceiling",
       "Binary Search Tree Node",
       "Red-Black Tree Implementation"
     ],
-    "last_seen": "2026-01-26T16:29:55.973159+00:00"
+    "last_seen": "2026-01-24T09:42:12.647473+00:00"
   },
   "binary_tree": {
-    "count": 14,
+    "count": 4,
     "examples": [
+      "Binary Tree Mirror",
+      "Merge Two Binary Trees",
+      "Binary Tree Node",
+      "Skew Heap",
       "Binary Tree Implementation",
       "Binary Tree Node Sum",
       "Binary Tree Path Sum",
-      "Binary Tree Traversals",
-      "Binary Tree Node"
+      "Binary Tree Traversals"
     ],
-    "last_seen": "2026-01-26T15:32:26.893302+00:00"
+    "last_seen": "2026-01-24T00:07:01.999310+00:00"
   },
   "biology": {
     "count": 1,
@@ -388,27 +343,19 @@
     ],
     "last_seen": "2026-01-26T15:30:43.524266+00:00"
   },
-  "bit manipulation": {
+  "bit_manipulation": {
     "count": 21,
     "examples": [
       "Binary Count Set Bits",
       "Binary Count Trailing Zeros",
       "Binary Shifts in Python",
       "Two's Complement",
-      "Counting Set Bits (Brian Kernighan's Algorithm)"
-    ],
-    "last_seen": "2026-01-26T16:49:06.338448+00:00"
-  },
-  "bit-manipulation": {
-    "count": 26,
-    "examples": [
+      "Counting Set Bits (Brian Kernighan's Algorithm)",
       "Binary AND Operation",
       "Binary Coded Decimal (BCD)",
-      "Binary Count Set Bits",
-      "Binary Count Trailing Zeros",
       "Binary OR Operation"
     ],
-    "last_seen": "2026-01-23T03:59:42.332000+00:00"
+    "last_seen": "2026-01-26T16:49:06.338448+00:00"
   },
   "bitmask": {
     "count": 1,
@@ -428,32 +375,24 @@
     ],
     "last_seen": "2026-01-26T11:18:35.159149+00:00"
   },
-  "block cipher": {
+  "block_cipher": {
     "count": 1,
     "examples": [
       "Block Cipher Encryption and Decryption"
     ],
     "last_seen": "2026-01-23T08:32:32.914815+00:00"
   },
-  "boolean algebra": {
+  "boolean_algebra": {
     "count": 4,
     "examples": [
       "K-Map Simplification",
       "NAND Gate Implementation",
-      "Quine-McCluskey Algorithm"
-    ],
-    "last_seen": "2026-01-23T04:07:28.814419+00:00"
-  },
-  "boolean-algebra": {
-    "count": 12,
-    "examples": [
+      "Quine-McCluskey Algorithm",
       "AND Gate Implementation",
       "Recursive Imply Gate",
-      "K-Map Simplification",
-      "2-to-1 Multiplexer",
-      "NAND Gate Implementation"
+      "2-to-1 Multiplexer"
     ],
-    "last_seen": "2026-01-23T04:08:21.108618+00:00"
+    "last_seen": "2026-01-23T04:07:28.814419+00:00"
   },
   "boruvka": {
     "count": 1,
@@ -462,20 +401,14 @@
     ],
     "last_seen": "2026-01-24T23:01:02.844676+00:00"
   },
-  "brute-force": {
+  "brute_force": {
     "count": 1,
     "examples": [
-      "Caesar Cipher Decryption"
-    ],
-    "last_seen": "2026-01-23T08:14:31.977354+00:00"
-  },
-  "brute_force": {
-    "count": 2,
-    "examples": [
+      "Caesar Cipher Decryption",
       "Convex Hull Algorithms",
       "Counting Negatives in a Sorted Matrix"
     ],
-    "last_seen": "2026-01-26T13:51:09.899926+00:00"
+    "last_seen": "2026-01-23T08:14:31.977354+00:00"
   },
   "bst": {
     "count": 2,
@@ -492,7 +425,7 @@
     ],
     "last_seen": "2026-01-26T15:58:37.952276+00:00"
   },
-  "byte manipulation": {
+  "byte_manipulation": {
     "count": 1,
     "examples": [
       "Byte Allocation"
@@ -506,7 +439,7 @@
     ],
     "last_seen": "2026-01-23T08:43:05.333167+00:00"
   },
-  "case conversion": {
+  "case_conversion": {
     "count": 3,
     "examples": [
       "CamelCase to Snake_case Conversion",
@@ -522,7 +455,7 @@
     ],
     "last_seen": "2026-01-23T16:39:15.355256+00:00"
   },
-  "central tendency": {
+  "central_tendency": {
     "count": 1,
     "examples": [
       "Mode Calculation"
@@ -554,31 +487,22 @@
     ],
     "last_seen": "2026-01-23T02:37:30.113011+00:00"
   },
-  "chi-squared": {
+  "chi_squared": {
     "count": 1,
     "examples": [
       "Caesar Cipher Decryption with Chi-Squared"
     ],
     "last_seen": "2026-01-23T08:17:33.411870+00:00"
   },
-  "cipher": {
-    "count": 20,
-    "examples": [
-      "Caesar Cipher",
-      "Atbash Cipher",
-      "Vigenère Cipher",
-      "Bifid Cipher Implementation",
-      "Caesar Cipher Decryption"
-    ],
-    "last_seen": "2026-01-23T09:06:49.253949+00:00"
-  },
   "ciphers": {
-    "count": 47,
+    "count": 67,
     "examples": [
-      "Simple Encoding and Decoding",
       "Caesar Cipher",
       "Atbash Cipher",
-      "Vigenère Cipher",
+      "Vigen\u00e8re Cipher",
+      "Bifid Cipher Implementation",
+      "Caesar Cipher Decryption",
+      "Simple Encoding and Decoding",
       "Simple Encoding/Decoding"
     ],
     "last_seen": "2026-01-23T09:06:49.253949+00:00"
@@ -604,19 +528,13 @@
     ],
     "last_seen": "2026-01-24T08:47:11.410495+00:00"
   },
-  "coin change": {
-    "count": 1,
-    "examples": [
-      "Minimum Change Calculation"
-    ],
-    "last_seen": "2026-01-26T10:10:09.297861+00:00"
-  },
   "coin_change": {
     "count": 1,
     "examples": [
+      "Minimum Change Calculation",
       "Dynamic Programming Coin Change"
     ],
-    "last_seen": "2026-01-24T09:31:40.312721+00:00"
+    "last_seen": "2026-01-26T10:10:09.297861+00:00"
   },
   "collections": {
     "count": 1,
@@ -665,27 +583,21 @@
     ],
     "last_seen": "2026-01-26T16:03:33.387677+00:00"
   },
-  "comparison sort": {
+  "comparison_sort": {
     "count": 4,
     "examples": [
       "Exchange Sort",
       "Insertion Sort",
       "Odd-Even Transposition Sort",
-      "Selection Sort"
-    ],
-    "last_seen": "2026-01-26T16:22:51.503366+00:00"
-  },
-  "comparison_sort": {
-    "count": 4,
-    "examples": [
+      "Selection Sort",
       "Bubble Sort",
       "Cocktail Shaker Sort",
       "Comb Sort",
       "Gnome Sort"
     ],
-    "last_seen": "2026-01-26T16:02:27.760282+00:00"
+    "last_seen": "2026-01-26T16:22:51.503366+00:00"
   },
-  "complex numbers": {
+  "complex_numbers": {
     "count": 2,
     "examples": [
       "Julia Set Visualization",
@@ -744,21 +656,21 @@
     ],
     "last_seen": "2026-01-26T16:41:16.488226+00:00"
   },
-  "cpu-scheduling": {
+  "cpu_scheduling": {
     "count": 2,
     "examples": [
       "Shortest Remaining Time First (SRTF) Scheduling"
     ],
     "last_seen": "2026-01-26T15:27:03.552007+00:00"
   },
-  "cramers rule": {
+  "cramers_rule": {
     "count": 1,
     "examples": [
       "Cramer's Rule for 2x2 Systems"
     ],
     "last_seen": "2026-01-26T13:53:59.147982+00:00"
   },
-  "credit card": {
+  "credit_card": {
     "count": 1,
     "examples": [
       "Credit Card Validation"
@@ -789,7 +701,7 @@
   "cryptography": {
     "count": 7,
     "examples": [
-      "Vigenère Cipher",
+      "Vigen\u00e8re Cipher",
       "Diffie-Hellman Key Exchange",
       "ElGamal Key Generation",
       "RSA Key Generation",
@@ -797,14 +709,14 @@
     ],
     "last_seen": "2026-01-26T10:30:41.494285+00:00"
   },
-  "curve approximation": {
+  "curve_approximation": {
     "count": 1,
     "examples": [
       "Line Length Approximation"
     ],
     "last_seen": "2026-01-26T12:22:43.562662+00:00"
   },
-  "cycle detection": {
+  "cycle_detection": {
     "count": 1,
     "examples": [
       "Cycle Detection in Directed Graph"
@@ -818,35 +730,19 @@
     ],
     "last_seen": "2026-01-24T22:49:59.335646+00:00"
   },
-  "data structure": {
-    "count": 2,
+  "data_structures": {
+    "count": 113,
     "examples": [
       "Binary Tree Node",
-      "Matrix Class in Python"
-    ],
-    "last_seen": "2026-01-26T14:58:42.712860+00:00"
-  },
-  "data-structures": {
-    "count": 111,
-    "examples": [
-      "Disjoint Set (Union-Find)",
-      "AVL Tree Implementation",
-      "Balanced Parentheses",
-      "Binary Tree Implementation",
-      "Binary Search Tree Implementation"
-    ],
-    "last_seen": "2026-01-24T00:32:24.756382+00:00"
-  },
-  "data_structure": {
-    "count": 45,
-    "examples": [
+      "Matrix Class in Python",
       "Disjoint Set (Union-Find)",
       "AVL Tree Implementation",
       "Binary Tree Implementation",
       "Binary Search Tree Implementation",
-      "Binomial Heap Implementation"
+      "Binomial Heap Implementation",
+      "Balanced Parentheses"
     ],
-    "last_seen": "2026-01-26T16:34:58.979768+00:00"
+    "last_seen": "2026-01-26T14:58:42.712860+00:00"
   },
   "date": {
     "count": 1,
@@ -876,7 +772,7 @@
   "decryption": {
     "count": 21,
     "examples": [
-      "Vigenère Cipher",
+      "Vigen\u00e8re Cipher",
       "Bifid Cipher Implementation",
       "Caesar Cipher Decryption",
       "Caesar Cipher",
@@ -920,7 +816,7 @@
     ],
     "last_seen": "2026-01-26T17:16:12.388815+00:00"
   },
-  "differential equations": {
+  "differential_equations": {
     "count": 3,
     "examples": [
       "Adams-Bashforth Method",
@@ -929,21 +825,21 @@
     ],
     "last_seen": "2026-01-26T13:12:44.250268+00:00"
   },
-  "digit sum": {
-    "count": 1,
-    "examples": [
-      "Harshad Numbers in Base Conversion"
-    ],
-    "last_seen": "2026-01-26T12:04:55.481608+00:00"
-  },
-  "digit-check": {
+  "digit_check": {
     "count": 1,
     "examples": [
       "EAN-13 Barcode Validation"
     ],
     "last_seen": "2026-01-26T16:35:46.097396+00:00"
   },
-  "digital logic": {
+  "digit_sum": {
+    "count": 1,
+    "examples": [
+      "Harshad Numbers in Base Conversion"
+    ],
+    "last_seen": "2026-01-26T12:04:55.481608+00:00"
+  },
+  "digital_logic": {
     "count": 1,
     "examples": [
       "2-to-1 Multiplexer"
@@ -960,7 +856,7 @@
     ],
     "last_seen": "2026-01-24T12:52:41.932321+00:00"
   },
-  "discrete mathematics": {
+  "discrete_mathematics": {
     "count": 1,
     "examples": [
       "Probability Distributions and Statistics"
@@ -985,27 +881,19 @@
     ],
     "last_seen": "2026-01-26T15:52:14.251000+00:00"
   },
-  "divide-and-conquer": {
+  "divide_and_conquer": {
     "count": 12,
     "examples": [
       "Closest Pair of Points",
       "Convex Hull Algorithms",
       "Heap Permutations",
       "Counting Inversions",
-      "Quickselect Algorithm"
-    ],
-    "last_seen": "2026-01-24T08:31:02.478763+00:00"
-  },
-  "divide_and_conquer": {
-    "count": 15,
-    "examples": [
-      "Closest Pair of Points",
-      "Counting Inversions",
+      "Quickselect Algorithm",
       "Maximum Difference in Array",
       "Divide and Conquer Maximum Subarray",
       "Merge Sort"
     ],
-    "last_seen": "2026-01-26T16:30:21.023107+00:00"
+    "last_seen": "2026-01-24T08:31:02.478763+00:00"
   },
   "double_hashing": {
     "count": 1,
@@ -1032,45 +920,28 @@
     ],
     "last_seen": "2026-01-26T10:32:57.970041+00:00"
   },
-  "dual numbers": {
+  "dual_numbers": {
     "count": 1,
     "examples": [
       "Dual Number Differentiation"
     ],
     "last_seen": "2026-01-26T11:35:54.670682+00:00"
   },
-  "dynamic programming": {
+  "dynamic_programming": {
     "count": 8,
     "examples": [
       "Climbing Stairs",
       "Fibonacci Sequence Generator",
       "Largest Divisible Subset",
       "Minimum Cost Path",
-      "Min Cost Climbing Stairs"
-    ],
-    "last_seen": "2026-01-26T14:53:17.371840+00:00"
-  },
-  "dynamic-programming": {
-    "count": 50,
-    "examples": [
+      "Min Cost Climbing Stairs",
       "Abbreviation Check",
       "All Construct",
       "Assignment Using Bitmask",
       "Catalan Numbers",
-      "Climbing Stairs"
+      "Coins Distribution in Binary Tree"
     ],
-    "last_seen": "2026-01-24T09:58:17.906423+00:00"
-  },
-  "dynamic_programming": {
-    "count": 26,
-    "examples": [
-      "Coins Distribution in Binary Tree",
-      "Abbreviation Check",
-      "All Construct",
-      "Assignment Using Bitmask",
-      "Catalan Numbers"
-    ],
-    "last_seen": "2026-01-26T17:15:17.674528+00:00"
+    "last_seen": "2026-01-26T14:53:17.371840+00:00"
   },
   "edit_distance": {
     "count": 2,
@@ -1084,16 +955,10 @@
     "count": 2,
     "examples": [
       "Lanczos Iteration for Eigenvalue Decomposition",
-      "Power Iteration"
-    ],
-    "last_seen": "2026-01-26T10:48:19.366872+00:00"
-  },
-  "eigenvalues": {
-    "count": 1,
-    "examples": [
+      "Power Iteration",
       "Rayleigh Quotient"
     ],
-    "last_seen": "2026-01-26T10:50:33.571005+00:00"
+    "last_seen": "2026-01-26T10:48:19.366872+00:00"
   },
   "eigenvector": {
     "count": 1,
@@ -1131,7 +996,7 @@
     "count": 23,
     "examples": [
       "Caesar Cipher",
-      "Vigenère Cipher",
+      "Vigen\u00e8re Cipher",
       "Bifid Cipher Implementation",
       "Enigma Machine Simulation",
       "Gronsfeld Cipher"
@@ -1152,14 +1017,14 @@
     ],
     "last_seen": "2026-01-26T11:37:01.468167+00:00"
   },
-  "equation solving": {
+  "equation_solving": {
     "count": 1,
     "examples": [
       "Solving Simultaneous Equations"
     ],
     "last_seen": "2026-01-26T13:19:23.145772+00:00"
   },
-  "error-correcting codes": {
+  "error_correcting_codes": {
     "count": 1,
     "examples": [
       "Hamming Code Implementation"
@@ -1196,7 +1061,7 @@
     ],
     "last_seen": "2026-01-26T12:53:00.389132+00:00"
   },
-  "even-odd": {
+  "even_odd": {
     "count": 1,
     "examples": [
       "Check if a Number is Even"
@@ -1226,21 +1091,21 @@
     ],
     "last_seen": "2026-01-26T14:51:36.697299+00:00"
   },
-  "expression conversion": {
+  "expression_conversion": {
     "count": 1,
     "examples": [
       "Infix to Postfix and Prefix Conversion"
     ],
     "last_seen": "2026-01-23T20:42:25.635669+00:00"
   },
-  "extended euclidean algorithm": {
+  "extended_euclidean_algorithm": {
     "count": 1,
     "examples": [
       "Modular Division and Inversion"
     ],
     "last_seen": "2026-01-26T12:32:28.320895+00:00"
   },
-  "external sort": {
+  "external_sort": {
     "count": 1,
     "examples": [
       "External Sort"
@@ -1277,7 +1142,7 @@
     ],
     "last_seen": "2026-01-23T21:06:40.250482+00:00"
   },
-  "fermat's little theorem": {
+  "fermat's_little_theorem": {
     "count": 1,
     "examples": [
       "Binary Exponentiation for Modular Inverse"
@@ -1302,7 +1167,7 @@
     ],
     "last_seen": "2026-01-26T15:36:02.927281+00:00"
   },
-  "file handling": {
+  "file_handling": {
     "count": 4,
     "examples": [
       "Transposition Cipher Encryption/Decryption",
@@ -1333,7 +1198,7 @@
     ],
     "last_seen": "2026-01-23T21:33:55.841752+00:00"
   },
-  "float manipulation": {
+  "float_manipulation": {
     "count": 1,
     "examples": [
       "Decimal Isolation"
@@ -1354,47 +1219,31 @@
     ],
     "last_seen": "2026-01-24T12:54:50.042673+00:00"
   },
-  "fourier transform": {
+  "fourier_transform": {
     "count": 1,
     "examples": [
       "Quantum Fourier Transform"
     ],
     "last_seen": "2026-01-26T15:18:13.186136+00:00"
   },
-  "fractal": {
-    "count": 4,
-    "examples": [
-      "Koch Snowflake Generation",
-      "Mandelbrot Set Visualization",
-      "Sierpinski Triangle",
-      "Vicsek Fractal Drawing"
-    ],
-    "last_seen": "2026-01-24T10:06:27.358667+00:00"
-  },
   "fractals": {
-    "count": 5,
+    "count": 9,
     "examples": [
-      "Julia Set Visualization",
       "Koch Snowflake Generation",
       "Mandelbrot Set Visualization",
       "Sierpinski Triangle",
-      "Vicsek Fractal Drawing"
+      "Vicsek Fractal Drawing",
+      "Julia Set Visualization"
     ],
     "last_seen": "2026-01-24T10:06:27.358667+00:00"
   },
   "fraction": {
     "count": 1,
     "examples": [
-      "Decimal to Fraction Conversion"
-    ],
-    "last_seen": "2026-01-26T11:31:54.905387+00:00"
-  },
-  "fractions": {
-    "count": 1,
-    "examples": [
+      "Decimal to Fraction Conversion",
       "Continued Fraction Representation"
     ],
-    "last_seen": "2026-01-26T11:30:23.220560+00:00"
+    "last_seen": "2026-01-26T11:31:54.905387+00:00"
   },
   "frequency": {
     "count": 1,
@@ -1410,7 +1259,7 @@
     ],
     "last_seen": "2026-01-26T16:47:23.913412+00:00"
   },
-  "frequent pattern mining": {
+  "frequent_pattern_mining": {
     "count": 1,
     "examples": [
       "FP-GraphMiner Algorithm"
@@ -1424,7 +1273,7 @@
     ],
     "last_seen": "2026-01-26T14:40:35.894924+00:00"
   },
-  "game theory": {
+  "game_theory": {
     "count": 1,
     "examples": [
       "Minimax Algorithm"
@@ -1448,7 +1297,7 @@
     ],
     "last_seen": "2026-01-23T04:08:21.108618+00:00"
   },
-  "gaussian elimination": {
+  "gaussian_elimination": {
     "count": 3,
     "examples": [
       "Gaussian Elimination with Back Substitution",
@@ -1476,13 +1325,6 @@
       "Prime Number Generation"
     ],
     "last_seen": "2026-01-26T12:56:50.067577+00:00"
-  },
-  "genetic-algorithm": {
-    "count": 1,
-    "examples": [
-      "Genetic Algorithm for String Evolution"
-    ],
-    "last_seen": "2026-01-24T10:08:15.875924+00:00"
   },
   "genetic_algorithm": {
     "count": 1,
@@ -1523,25 +1365,19 @@
       "Hamiltonian Cycle",
       "Lowest Common Ancestor (LCA) using Sparse Table",
       "Floyd-Warshall Algorithm",
-      "Viterbi Algorithm"
-    ],
-    "last_seen": "2026-01-26T16:29:07.283298+00:00"
-  },
-  "graphs": {
-    "count": 62,
-    "examples": [
+      "Viterbi Algorithm",
       "Ant Colony Optimization for TSP",
       "Finding Articulation Points in Undirected Graph",
       "A* Search Algorithm",
       "Graph Initialization and Traversal",
       "Bellman-Ford Algorithm"
     ],
-    "last_seen": "2026-01-26T10:04:14.852602+00:00"
+    "last_seen": "2026-01-26T16:29:07.283298+00:00"
   },
   "greedy": {
     "count": 17,
     "examples": [
-      "Borůvka's Algorithm",
+      "Bor\u016fvka's Algorithm",
       "Greedy Minimum Vertex Cover",
       "Kruskal's Algorithm",
       "Prim's Algorithm for Minimum Spanning Tree",
@@ -1549,7 +1385,7 @@
     ],
     "last_seen": "2026-01-26T15:21:58.083038+00:00"
   },
-  "greedy-methods": {
+  "greedy_methods": {
     "count": 9,
     "examples": [
       "Best Time to Buy and Sell Stock",
@@ -1570,34 +1406,26 @@
     ],
     "last_seen": "2026-01-26T13:52:18.272625+00:00"
   },
-  "hamming code": {
+  "hamming_code": {
     "count": 1,
     "examples": [
       "Hamming Code Implementation"
     ],
     "last_seen": "2026-01-26T10:21:21.951457+00:00"
   },
-  "hand evaluation": {
+  "hand_evaluation": {
     "count": 1,
     "examples": [
       "Poker Hand Evaluation"
     ],
     "last_seen": "2026-01-26T15:16:57.105346+00:00"
   },
-  "harshad numbers": {
+  "harshad_numbers": {
     "count": 1,
     "examples": [
       "Harshad Numbers in Base Conversion"
     ],
     "last_seen": "2026-01-26T12:04:55.481608+00:00"
-  },
-  "hash": {
-    "count": 2,
-    "examples": [
-      "Adler-32 Checksum",
-      "MD5 Hash Function"
-    ],
-    "last_seen": "2026-01-26T10:24:08.833292+00:00"
   },
   "hash_table": {
     "count": 4,
@@ -1610,9 +1438,10 @@
     "last_seen": "2026-01-23T21:35:40.784893+00:00"
   },
   "hashes": {
-    "count": 12,
+    "count": 14,
     "examples": [
       "Adler-32 Checksum",
+      "MD5 Hash Function",
       "Chaos Machine",
       "DJB2 Hash Function",
       "ElfHash Algorithm",
@@ -1684,7 +1513,7 @@
     ],
     "last_seen": "2026-01-26T11:13:19.560877+00:00"
   },
-  "high-precision": {
+  "high_precision": {
     "count": 1,
     "examples": [
       "Chudnovsky Algorithm for Pi"
@@ -1697,6 +1526,13 @@
       "Enigma Machine Simulation"
     ],
     "last_seen": "2026-01-23T08:25:06.594519+00:00"
+  },
+  "horner's_method": {
+    "count": 1,
+    "examples": [
+      "Polynomial Evaluation"
+    ],
+    "last_seen": "2026-01-26T12:53:00.389132+00:00"
   },
   "householder_reflection": {
     "count": 1,
@@ -1720,7 +1556,7 @@
     ],
     "last_seen": "2026-01-24T10:03:39.214268+00:00"
   },
-  "in-place": {
+  "in_place": {
     "count": 2,
     "examples": [
       "Cycle Sort",
@@ -1763,22 +1599,16 @@
     ],
     "last_seen": "2026-01-26T15:32:26.893302+00:00"
   },
-  "insertion sort": {
+  "insertion_sort": {
     "count": 1,
     "examples": [
-      "Merge Insertion Sort"
-    ],
-    "last_seen": "2026-01-26T16:07:48.187078+00:00"
-  },
-  "insertion_sort": {
-    "count": 5,
-    "examples": [
+      "Merge Insertion Sort",
       "Binary Insertion Sort",
       "IntroSort",
       "Shell Sort",
       "Tim Sort"
     ],
-    "last_seen": "2026-01-26T16:28:04.147550+00:00"
+    "last_seen": "2026-01-26T16:07:48.187078+00:00"
   },
   "integer": {
     "count": 2,
@@ -1788,14 +1618,14 @@
     ],
     "last_seen": "2026-01-26T15:48:23.085739+00:00"
   },
-  "integer manipulation": {
+  "integer_manipulation": {
     "count": 1,
     "examples": [
       "Counting Digits in an Integer"
     ],
     "last_seen": "2026-01-26T12:40:03.473393+00:00"
   },
-  "integer operations": {
+  "integer_operations": {
     "count": 2,
     "examples": [
       "Reverse Bit",
@@ -1803,7 +1633,7 @@
     ],
     "last_seen": "2026-01-26T13:07:53.774379+00:00"
   },
-  "integer sort": {
+  "integer_sort": {
     "count": 1,
     "examples": [
       "Pigeonhole Sort"
@@ -1864,7 +1694,7 @@
     ],
     "last_seen": "2026-01-26T16:06:38.792640+00:00"
   },
-  "iterative methods": {
+  "iterative_methods": {
     "count": 2,
     "examples": [
       "Conjugate Gradient Method",
@@ -1880,45 +1710,32 @@
     ],
     "last_seen": "2026-01-23T21:01:22.062130+00:00"
   },
-  "job scheduling": {
+  "job_scheduling": {
     "count": 1,
     "examples": [
       "Job Sequencing with Deadlines"
     ],
     "last_seen": "2026-01-26T15:21:58.083038+00:00"
   },
-  "k-means": {
+  "k_means": {
     "count": 1,
     "examples": [
       "K-Means Clustering with TensorFlow"
     ],
     "last_seen": "2026-01-24T08:47:11.410495+00:00"
   },
-  "kd-tree": {
+  "kd_tree": {
     "count": 4,
     "examples": [
       "KD-Tree Nearest Neighbor Search",
       "KD-Tree Node",
       "Nearest Neighbour Search in KD-Tree",
-      "KD-Tree Testing"
+      "KD-Tree Testing",
+      "KD-Tree Construction"
     ],
     "last_seen": "2026-01-24T00:25:57.143508+00:00"
   },
-  "kd_tree": {
-    "count": 1,
-    "examples": [
-      "KD-Tree Construction"
-    ],
-    "last_seen": "2026-01-23T09:25:44.647635+00:00"
-  },
-  "key generation": {
-    "count": 1,
-    "examples": [
-      "RSA Key Generation"
-    ],
-    "last_seen": "2026-01-23T08:48:01.450505+00:00"
-  },
-  "key-exchange": {
+  "key_exchange": {
     "count": 1,
     "examples": [
       "Diffie-Hellman Key Exchange"
@@ -1928,9 +1745,10 @@
   "key_generation": {
     "count": 1,
     "examples": [
+      "RSA Key Generation",
       "ElGamal Key Generation"
     ],
-    "last_seen": "2026-01-23T08:22:59.677060+00:00"
+    "last_seen": "2026-01-23T08:48:01.450505+00:00"
   },
   "keyword": {
     "count": 1,
@@ -1972,7 +1790,7 @@
     ],
     "last_seen": "2026-01-24T22:54:33.545566+00:00"
   },
-  "language detection": {
+  "language_detection": {
     "count": 1,
     "examples": [
       "English Text Detection"
@@ -2008,41 +1826,18 @@
     ],
     "last_seen": "2026-01-26T15:57:45.872748+00:00"
   },
-  "linear algebra": {
+  "linear_algebra": {
     "count": 20,
     "examples": [
       "Hill Cipher Implementation",
       "Conjugate Gradient Method",
       "Gaussian Elimination with Back Substitution",
       "Gaussian Elimination with Partial Pivoting",
-      "Jacobi Iteration Method"
-    ],
-    "last_seen": "2026-01-26T14:58:42.712860+00:00"
-  },
-  "linear-algebra": {
-    "count": 14,
-    "examples": [
-      "Conjugate Gradient Method",
-      "Gaussian Elimination with Back Substitution",
-      "Gaussian Elimination with Partial Pivoting",
       "Jacobi Iteration Method",
-      "Vector and Matrix Classes"
-    ],
-    "last_seen": "2026-01-26T10:55:50.531826+00:00"
-  },
-  "linear-programming": {
-    "count": 1,
-    "examples": [
-      "Simplex Algorithm Implementation"
-    ],
-    "last_seen": "2026-01-26T10:57:36.826847+00:00"
-  },
-  "linear_algebra": {
-    "count": 1,
-    "examples": [
+      "Vector and Matrix Classes",
       "QR Decomposition using Householder Reflection"
     ],
-    "last_seen": "2026-01-26T13:03:47.675890+00:00"
+    "last_seen": "2026-01-26T14:58:42.712860+00:00"
   },
   "linear_probing": {
     "count": 2,
@@ -2067,23 +1862,17 @@
     ],
     "last_seen": "2026-01-26T15:42:33.420161+00:00"
   },
-  "linked list": {
+  "linked_list": {
     "count": 1,
     "examples": [
-      "Linked Queue Implementation"
-    ],
-    "last_seen": "2026-01-23T21:02:38.367937+00:00"
-  },
-  "linked_list": {
-    "count": 18,
-    "examples": [
+      "Linked Queue Implementation",
       "Circular Linked List",
       "Circular Queue using Linked Lists",
       "Doubly Linked List",
       "Doubly Linked List Implementation",
       "Linked List Implementation"
     ],
-    "last_seen": "2026-01-24T00:21:57.651530+00:00"
+    "last_seen": "2026-01-23T21:02:38.367937+00:00"
   },
   "list": {
     "count": 4,
@@ -2095,7 +1884,7 @@
     ],
     "last_seen": "2026-01-26T16:50:20.490618+00:00"
   },
-  "list comprehension": {
+  "list_comprehension": {
     "count": 2,
     "examples": [
       "Count Triangular Number Words",
@@ -2103,7 +1892,7 @@
     ],
     "last_seen": "2026-01-26T17:13:45.557969+00:00"
   },
-  "list processing": {
+  "list_processing": {
     "count": 1,
     "examples": [
       "Custom Join Function"
@@ -2135,7 +1924,7 @@
     ],
     "last_seen": "2026-01-23T04:08:21.108618+00:00"
   },
-  "logic gates": {
+  "logic_gates": {
     "count": 5,
     "examples": [
       "AND Gate Implementation",
@@ -2145,7 +1934,7 @@
     ],
     "last_seen": "2026-01-23T04:04:30.130329+00:00"
   },
-  "logistic map": {
+  "logistic_map": {
     "count": 1,
     "examples": [
       "Chaos Machine"
@@ -2176,7 +1965,7 @@
     ],
     "last_seen": "2026-01-23T16:49:26.257386+00:00"
   },
-  "lowercase conversion": {
+  "lowercase_conversion": {
     "count": 1,
     "examples": [
       "Lowercase Conversion"
@@ -2218,17 +2007,6 @@
     ],
     "last_seen": "2026-01-24T22:56:17.047204+00:00"
   },
-  "math": {
-    "count": 103,
-    "examples": [
-      "Find Previous Power of Two",
-      "Check if a Number is a Power of Two",
-      "Largest Power of Two Less Than or Equal to a Number",
-      "Different Signs Check",
-      "Power of Four"
-    ],
-    "last_seen": "2026-01-26T15:11:35.399035+00:00"
-  },
   "mathematics": {
     "count": 4,
     "examples": [
@@ -2240,15 +2018,20 @@
     "last_seen": "2026-01-26T12:37:55.534734+00:00"
   },
   "maths": {
-    "count": 171,
+    "count": 274,
     "examples": [
+      "Find Previous Power of Two",
+      "Check if a Number is a Power of Two",
+      "Largest Power of Two Less Than or Equal to a Number",
+      "Different Signs Check",
+      "Power of Four",
       "Absolute Value Functions",
       "Adams-Bashforth Method",
       "Bitwise Addition",
       "Aliquot Sum Calculation",
       "Byte Allocation"
     ],
-    "last_seen": "2026-01-26T13:47:02.423101+00:00"
+    "last_seen": "2026-01-26T15:11:35.399035+00:00"
   },
   "matplotlib": {
     "count": 2,
@@ -2269,14 +2052,14 @@
     ],
     "last_seen": "2026-01-26T15:02:55.874345+00:00"
   },
-  "matrix manipulation": {
+  "matrix_manipulation": {
     "count": 1,
     "examples": [
       "Bejeweled Game Logic"
     ],
     "last_seen": "2026-01-26T14:40:35.894924+00:00"
   },
-  "matrix operations": {
+  "matrix_operations": {
     "count": 2,
     "examples": [
       "Transformation Matrices",
@@ -2360,20 +2143,14 @@
     ],
     "last_seen": "2026-01-26T10:11:32.136291+00:00"
   },
-  "merge sort": {
+  "merge_sort": {
     "count": 1,
     "examples": [
-      "Merge Insertion Sort"
-    ],
-    "last_seen": "2026-01-26T16:07:48.187078+00:00"
-  },
-  "merge_sort": {
-    "count": 2,
-    "examples": [
+      "Merge Insertion Sort",
       "Iterative Merge Sort",
       "Tim Sort"
     ],
-    "last_seen": "2026-01-26T16:28:04.147550+00:00"
+    "last_seen": "2026-01-26T16:07:48.187078+00:00"
   },
   "metric": {
     "count": 1,
@@ -2398,7 +2175,7 @@
     ],
     "last_seen": "2026-01-26T10:04:14.852602+00:00"
   },
-  "modular arithmetic": {
+  "modular_arithmetic": {
     "count": 5,
     "examples": [
       "Modular Inverse",
@@ -2428,7 +2205,7 @@
   "mst": {
     "count": 6,
     "examples": [
-      "Borůvka's Algorithm",
+      "Bor\u016fvka's Algorithm",
       "Graph Implementation with MST",
       "Kruskal's Algorithm",
       "Prim's Algorithm Implementation",
@@ -2472,7 +2249,7 @@
     ],
     "last_seen": "2026-01-26T16:13:32.771791+00:00"
   },
-  "multistep methods": {
+  "multistep_methods": {
     "count": 1,
     "examples": [
       "Adams-Bashforth Method"
@@ -2486,21 +2263,21 @@
     ],
     "last_seen": "2026-01-24T10:08:15.875924+00:00"
   },
-  "n-queens": {
+  "n_queens": {
     "count": 1,
     "examples": [
       "N-Queens Problem"
     ],
     "last_seen": "2026-01-23T02:36:40.461808+00:00"
   },
-  "nearest neighbor": {
+  "nearest_neighbor": {
     "count": 1,
     "examples": [
       "KD-Tree Nearest Neighbor Search"
     ],
     "last_seen": "2026-01-23T16:31:38.306258+00:00"
   },
-  "nearest-neighbour": {
+  "nearest_neighbour": {
     "count": 1,
     "examples": [
       "Nearest Neighbour Search in KD-Tree"
@@ -2515,7 +2292,7 @@
     ],
     "last_seen": "2026-01-26T15:05:55.680908+00:00"
   },
-  "networking-flow": {
+  "networking_flow": {
     "count": 2,
     "examples": [
       "Ford-Fulkerson Algorithm",
@@ -2552,17 +2329,6 @@
     ],
     "last_seen": "2026-01-23T20:46:35.717050+00:00"
   },
-  "number theory": {
-    "count": 26,
-    "examples": [
-      "Primitive Root Finder",
-      "RSA Factorization",
-      "Narcissistic Numbers Finder",
-      "Aliquot Sum Calculation",
-      "Armstrong, Narcissistic, and Pluperfect Numbers"
-    ],
-    "last_seen": "2026-01-26T13:45:32.723485+00:00"
-  },
   "number_of_divisors": {
     "count": 1,
     "examples": [
@@ -2571,66 +2337,53 @@
     "last_seen": "2026-01-26T11:15:34.520054+00:00"
   },
   "number_theory": {
-    "count": 5,
+    "count": 26,
     "examples": [
+      "Primitive Root Finder",
+      "RSA Factorization",
+      "Narcissistic Numbers Finder",
+      "Aliquot Sum Calculation",
+      "Armstrong, Narcissistic, and Pluperfect Numbers",
       "Miller-Rabin Primality Test",
       "Lucas-Lehmer Test",
       "Mobius Function",
       "Pollard's Rho Algorithm",
       "Solovay-Strassen Primality Test"
     ],
-    "last_seen": "2026-01-26T13:24:36.342342+00:00"
+    "last_seen": "2026-01-26T13:45:32.723485+00:00"
   },
-  "numerical analysis": {
+  "numerical_analysis": {
     "count": 2,
     "examples": [
       "Adams-Bashforth Method",
-      "Secant Method for Root Finding"
+      "Secant Method for Root Finding",
+      "Secant Method",
+      "Weierstrass (Durand-Kerner) Method"
     ],
     "last_seen": "2026-01-26T12:10:19.710595+00:00"
   },
-  "numerical integration": {
+  "numerical_integration": {
     "count": 5,
     "examples": [
       "Trapezoidal Rule for Numerical Integration",
       "Line Length Approximation",
       "Simpson's Rule for Numerical Integration",
-      "Trapezoidal Rule"
+      "Trapezoidal Rule",
+      "Gamma Function Implementation"
     ],
     "last_seen": "2026-01-26T13:34:34.092670+00:00"
   },
-  "numerical methods": {
+  "numerical_methods": {
     "count": 7,
     "examples": [
       "Explicit Euler Method",
       "Euler's Modified Method",
       "Simpson's Integration",
       "Newton-Raphson Method",
-      "Runge-Kutta Method"
-    ],
-    "last_seen": "2026-01-26T13:12:44.250268+00:00"
-  },
-  "numerical-analysis": {
-    "count": 2,
-    "examples": [
-      "Secant Method",
-      "Weierstrass (Durand-Kerner) Method"
-    ],
-    "last_seen": "2026-01-26T13:43:52.920856+00:00"
-  },
-  "numerical_integration": {
-    "count": 1,
-    "examples": [
-      "Gamma Function Implementation"
-    ],
-    "last_seen": "2026-01-26T11:52:47.551437+00:00"
-  },
-  "numerical_methods": {
-    "count": 1,
-    "examples": [
+      "Runge-Kutta Method",
       "Newton's Method for Square Root"
     ],
-    "last_seen": "2026-01-26T13:26:45.623873+00:00"
+    "last_seen": "2026-01-26T13:12:44.250268+00:00"
   },
   "numpy": {
     "count": 11,
@@ -2643,7 +2396,7 @@
     ],
     "last_seen": "2026-01-26T15:01:58.489141+00:00"
   },
-  "object-oriented programming": {
+  "object_oriented_programming": {
     "count": 1,
     "examples": [
       "Matrix Class in Python"
@@ -2659,7 +2412,7 @@
     ],
     "last_seen": "2026-01-26T13:09:12.620310+00:00"
   },
-  "one-time pad": {
+  "one_time_pad": {
     "count": 1,
     "examples": [
       "One-Time Pad Encryption"
@@ -2674,19 +2427,12 @@
     ],
     "last_seen": "2026-01-23T16:47:12.437617+00:00"
   },
-  "operating-system": {
+  "operating_system": {
     "count": 2,
     "examples": [
       "Shortest Remaining Time First (SRTF) Scheduling"
     ],
     "last_seen": "2026-01-26T15:27:03.552007+00:00"
-  },
-  "operating_systems": {
-    "count": 1,
-    "examples": [
-      "Shortest Remaining Time First (SRTF) Scheduling"
-    ],
-    "last_seen": "2026-01-26T15:20:12.041321+00:00"
   },
   "optimization": {
     "count": 6,
@@ -2737,7 +2483,7 @@
     ],
     "last_seen": "2026-01-26T16:11:15.896724+00:00"
   },
-  "parallel computing": {
+  "parallel_computing": {
     "count": 1,
     "examples": [
       "Odd-Even Transposition Sort"
@@ -2775,7 +2521,7 @@
     ],
     "last_seen": "2026-01-26T17:16:48.924426+00:00"
   },
-  "pattern matching": {
+  "pattern_matching": {
     "count": 2,
     "examples": [
       "Naive Pattern Search",
@@ -2789,18 +2535,12 @@
       "Generate All Permutations",
       "Block Cipher Encryption and Decryption",
       "Heap Permutations",
-      "Kth Permutation Sequence"
-    ],
-    "last_seen": "2026-01-26T12:19:21.436827+00:00"
-  },
-  "permutations": {
-    "count": 3,
-    "examples": [
+      "Kth Permutation Sequence",
       "Permutations",
       "Triplet Sum Problem",
       "Pandigital Multiplication"
     ],
-    "last_seen": "2026-01-26T15:09:16.284613+00:00"
+    "last_seen": "2026-01-26T12:19:21.436827+00:00"
   },
   "persistent_tree": {
     "count": 1,
@@ -2809,7 +2549,7 @@
     ],
     "last_seen": "2026-01-24T00:32:24.756382+00:00"
   },
-  "phone validation": {
+  "phone_validation": {
     "count": 1,
     "examples": [
       "Sri Lankan Phone Number Validator"
@@ -2865,7 +2605,7 @@
     ],
     "last_seen": "2026-01-26T13:43:52.920856+00:00"
   },
-  "polynomial multiplication": {
+  "polynomial_multiplication": {
     "count": 1,
     "examples": [
       "Fast Fourier Transform (FFT) Implementation"
@@ -2881,20 +2621,14 @@
     ],
     "last_seen": "2026-01-23T21:27:25.102429+00:00"
   },
-  "prefix-sum": {
+  "prefix_sum": {
     "count": 1,
     "examples": [
-      "Equilibrium Index"
-    ],
-    "last_seen": "2026-01-23T16:29:47.969034+00:00"
-  },
-  "prefix_sum": {
-    "count": 3,
-    "examples": [
+      "Equilibrium Index",
       "Fenwick Tree (Binary Indexed Tree)",
       "Prefix Sum Array"
     ],
-    "last_seen": "2026-01-24T09:44:45.734737+00:00"
+    "last_seen": "2026-01-23T16:29:47.969034+00:00"
   },
   "prim": {
     "count": 1,
@@ -2924,40 +2658,28 @@
     ],
     "last_seen": "2026-01-26T13:37:05.281611+00:00"
   },
-  "prime factorization": {
+  "prime_factorization": {
     "count": 1,
     "examples": [
-      "Exact Prime Factor Count"
+      "Exact Prime Factor Count",
+      "Prime Factorization and GCD"
     ],
     "last_seen": "2026-01-26T12:01:21.019713+00:00"
   },
-  "prime factors": {
+  "prime_factors": {
     "count": 1,
     "examples": [
-      "Liouville Lambda Function"
+      "Liouville Lambda Function",
+      "Prime Factorization and Number Theory Functions"
     ],
     "last_seen": "2026-01-26T12:23:31.104175+00:00"
   },
-  "prime generation": {
+  "prime_generation": {
     "count": 1,
     "examples": [
       "Prime Number Generation"
     ],
     "last_seen": "2026-01-26T12:56:50.067577+00:00"
-  },
-  "prime_factorization": {
-    "count": 1,
-    "examples": [
-      "Prime Factorization and GCD"
-    ],
-    "last_seen": "2026-01-26T11:54:25.795976+00:00"
-  },
-  "prime_factors": {
-    "count": 1,
-    "examples": [
-      "Prime Factorization and Number Theory Functions"
-    ],
-    "last_seen": "2026-01-26T11:15:34.520054+00:00"
   },
   "priority_queue": {
     "count": 4,
@@ -3001,7 +2723,7 @@
     ],
     "last_seen": "2026-01-26T15:23:47.325593+00:00"
   },
-  "project-euler": {
+  "project_euler": {
     "count": 11,
     "examples": [
       "Sum of Multiples",
@@ -3064,7 +2786,7 @@
     ],
     "last_seen": "2026-01-26T15:18:13.186136+00:00"
   },
-  "quantum computing": {
+  "quantum_computing": {
     "count": 1,
     "examples": [
       "Quantum Fourier Transform"
@@ -3106,19 +2828,19 @@
     ],
     "last_seen": "2026-01-23T08:40:29.960466+00:00"
   },
-  "radix tree": {
-    "count": 1,
-    "examples": [
-      "Radix Tree Implementation"
-    ],
-    "last_seen": "2026-01-23T21:46:19.782593+00:00"
-  },
   "radix_sort": {
     "count": 1,
     "examples": [
       "MSD Radix Sort"
     ],
     "last_seen": "2026-01-26T16:09:51.550425+00:00"
+  },
+  "radix_tree": {
+    "count": 1,
+    "examples": [
+      "Radix Tree Implementation"
+    ],
+    "last_seen": "2026-01-23T21:46:19.782593+00:00"
   },
   "random": {
     "count": 3,
@@ -3208,24 +2930,18 @@
     ],
     "last_seen": "2026-01-26T17:05:40.840768+00:00"
   },
-  "root finding": {
+  "root_finding": {
     "count": 2,
     "examples": [
       "Secant Method for Root Finding",
-      "Newton-Raphson Method"
-    ],
-    "last_seen": "2026-01-26T12:39:09.783456+00:00"
-  },
-  "root-finding": {
-    "count": 4,
-    "examples": [
+      "Newton-Raphson Method",
       "Bisection Method",
       "Secant Method",
       "Weierstrass (Durand-Kerner) Method"
     ],
-    "last_seen": "2026-01-26T13:43:52.920856+00:00"
+    "last_seen": "2026-01-26T12:39:09.783456+00:00"
   },
-  "rotating gears": {
+  "rotating_gears": {
     "count": 1,
     "examples": [
       "Enigma Machine Simulation"
@@ -3241,19 +2957,13 @@
     ],
     "last_seen": "2026-01-26T14:54:29.455414+00:00"
   },
-  "round-robin": {
-    "count": 1,
-    "examples": [
-      "Round Robin Scheduling"
-    ],
-    "last_seen": "2026-01-26T15:25:48.386625+00:00"
-  },
   "round_robin": {
     "count": 1,
     "examples": [
+      "Round Robin Scheduling",
       "Multi-Level Feedback Queue (MLFQ) Scheduling"
     ],
-    "last_seen": "2026-01-26T15:23:47.325593+00:00"
+    "last_seen": "2026-01-26T15:25:48.386625+00:00"
   },
   "rounding": {
     "count": 2,
@@ -3279,7 +2989,7 @@
     ],
     "last_seen": "2026-01-23T08:48:01.450505+00:00"
   },
-  "runge-kutta": {
+  "runge_kutta": {
     "count": 1,
     "examples": [
       "Runge-Kutta Gill Method"
@@ -3304,27 +3014,21 @@
     ],
     "last_seen": "2026-01-26T15:27:03.552007+00:00"
   },
-  "search": {
-    "count": 15,
+  "searches": {
+    "count": 32,
     "examples": [
       "Nearest Neighbour Search in KD-Tree",
       "Bidirectional Search",
       "Greedy Best-First Search",
       "Binary Search",
-      "Search in a Sorted Matrix"
-    ],
-    "last_seen": "2026-01-26T16:56:45.426008+00:00"
-  },
-  "searches": {
-    "count": 17,
-    "examples": [
+      "Search in a Sorted Matrix",
       "Binary Search Algorithms",
       "Binary Tree Traversal and Construction",
       "Double Linear Search",
       "Recursive Binary Search",
       "Exponential Search"
     ],
-    "last_seen": "2026-01-26T15:47:49.515244+00:00"
+    "last_seen": "2026-01-26T16:56:45.426008+00:00"
   },
   "security": {
     "count": 1,
@@ -3341,7 +3045,7 @@
     ],
     "last_seen": "2026-01-26T15:42:01.302453+00:00"
   },
-  "semiperfect number": {
+  "semiperfect_number": {
     "count": 1,
     "examples": [
       "Weird Number Check"
@@ -3402,22 +3106,15 @@
     ],
     "last_seen": "2026-01-23T04:09:37.401144+00:00"
   },
-  "shortest path": {
+  "shortest_path": {
     "count": 1,
     "examples": [
-      "Dijkstra's Algorithm"
-    ],
-    "last_seen": "2026-01-24T12:50:48.912789+00:00"
-  },
-  "shortest_path": {
-    "count": 5,
-    "examples": [
+      "Dijkstra's Algorithm",
       "Floyd-Warshall Algorithm",
       "Bellman-Ford Algorithm",
-      "Breadth-First Search (BFS) for Shortest Path",
-      "Dijkstra's Algorithm"
+      "Breadth-First Search (BFS) for Shortest Path"
     ],
-    "last_seen": "2026-01-24T12:47:19.099394+00:00"
+    "last_seen": "2026-01-24T12:50:48.912789+00:00"
   },
   "sieve": {
     "count": 4,
@@ -3457,7 +3154,7 @@
     ],
     "last_seen": "2026-01-23T04:02:01.122637+00:00"
   },
-  "simpsons rule": {
+  "simpsons_rule": {
     "count": 1,
     "examples": [
       "Simpson's Rule for Numerical Integration"
@@ -3524,6 +3221,13 @@
     ],
     "last_seen": "2026-01-23T21:05:01.007731+00:00"
   },
+  "spd_matrix": {
+    "count": 1,
+    "examples": [
+      "Conjugate Gradient Method"
+    ],
+    "last_seen": "2026-01-26T10:36:52.083689+00:00"
+  },
   "spiral": {
     "count": 1,
     "examples": [
@@ -3545,7 +3249,7 @@
     ],
     "last_seen": "2026-01-26T13:26:45.623873+00:00"
   },
-  "stable marriage": {
+  "stable_marriage": {
     "count": 1,
     "examples": [
       "Stable Matching Algorithm"
@@ -3559,16 +3263,10 @@
       "Balanced Parentheses",
       "Dijkstra's Two-Stack Algorithm",
       "Infix to Postfix Conversion",
-      "Infix to Postfix and Prefix Conversion"
-    ],
-    "last_seen": "2026-01-24T00:16:17.041116+00:00"
-  },
-  "stacks": {
-    "count": 1,
-    "examples": [
+      "Infix to Postfix and Prefix Conversion",
       "Patience Sort"
     ],
-    "last_seen": "2026-01-26T16:15:38.828339+00:00"
+    "last_seen": "2026-01-24T00:16:17.041116+00:00"
   },
   "statistics": {
     "count": 10,
@@ -3581,18 +3279,14 @@
     ],
     "last_seen": "2026-01-26T13:25:45.016308+00:00"
   },
-  "string": {
-    "count": 37,
+  "string_evolution": {
+    "count": 1,
     "examples": [
-      "Word Pattern Matching",
-      "Word Break",
-      "Suffix Tree",
-      "Suffix Tree Node",
-      "Abbreviation Check"
+      "Genetic Algorithm for String Evolution"
     ],
-    "last_seen": "2026-01-26T17:17:47.233208+00:00"
+    "last_seen": "2026-01-24T10:08:15.875924+00:00"
   },
-  "string manipulation": {
+  "string_manipulation": {
     "count": 28,
     "examples": [
       "Caesar Cipher",
@@ -3603,19 +3297,12 @@
     ],
     "last_seen": "2026-01-26T17:13:45.557969+00:00"
   },
-  "string matching": {
+  "string_matching": {
     "count": 1,
     "examples": [
       "Radix Tree Implementation"
     ],
     "last_seen": "2026-01-23T21:46:19.782593+00:00"
-  },
-  "string_evolution": {
-    "count": 1,
-    "examples": [
-      "Genetic Algorithm for String Evolution"
-    ],
-    "last_seen": "2026-01-24T10:08:15.875924+00:00"
   },
   "string_search": {
     "count": 3,
@@ -3634,8 +3321,13 @@
     "last_seen": "2026-01-26T17:00:44.648773+00:00"
   },
   "strings": {
-    "count": 56,
+    "count": 93,
     "examples": [
+      "Word Pattern Matching",
+      "Word Break",
+      "Suffix Tree",
+      "Suffix Tree Node",
+      "Abbreviation Check",
       "Aho-Corasick Algorithm",
       "Alternative String Arrange",
       "Anagram Finder",
@@ -3672,19 +3364,13 @@
     ],
     "last_seen": "2026-01-24T08:48:15.143135+00:00"
   },
-  "subset-sum": {
-    "count": 1,
-    "examples": [
-      "Subset Sum Problem"
-    ],
-    "last_seen": "2026-01-24T09:51:44.833322+00:00"
-  },
   "subset_sum": {
     "count": 1,
     "examples": [
+      "Subset Sum Problem",
       "Partition Equal Subset Sum"
     ],
-    "last_seen": "2026-01-24T09:33:52.036964+00:00"
+    "last_seen": "2026-01-24T09:51:44.833322+00:00"
   },
   "substitution": {
     "count": 5,
@@ -3697,20 +3383,14 @@
     ],
     "last_seen": "2026-01-23T08:37:37.652945+00:00"
   },
-  "substitution cipher": {
+  "substitution_cipher": {
     "count": 1,
     "examples": [
-      "Substitution Cipher"
-    ],
-    "last_seen": "2026-01-23T08:52:52.199398+00:00"
-  },
-  "substitution_cipher": {
-    "count": 2,
-    "examples": [
+      "Substitution Cipher",
       "Running Key Cipher",
       "Frequency Finder"
     ],
-    "last_seen": "2026-01-26T16:47:23.913412+00:00"
+    "last_seen": "2026-01-23T08:52:52.199398+00:00"
   },
   "sudoku": {
     "count": 3,
@@ -3815,21 +3495,21 @@
     ],
     "last_seen": "2026-01-26T15:16:57.105346+00:00"
   },
-  "text analysis": {
+  "text_analysis": {
     "count": 1,
     "examples": [
       "Text Entropy Calculation"
     ],
     "last_seen": "2026-01-26T11:37:01.468167+00:00"
   },
-  "text formatting": {
+  "text_formatting": {
     "count": 1,
     "examples": [
       "Text Justification"
     ],
     "last_seen": "2026-01-26T17:11:13.154368+00:00"
   },
-  "text processing": {
+  "text_processing": {
     "count": 4,
     "examples": [
       "English Text Detection",
@@ -3839,7 +3519,7 @@
     ],
     "last_seen": "2026-01-26T17:11:58.725590+00:00"
   },
-  "three-way partitioning": {
+  "three_way_partitioning": {
     "count": 1,
     "examples": [
       "Dutch National Flag Sort"
@@ -3897,7 +3577,7 @@
     ],
     "last_seen": "2026-01-26T13:34:34.092670+00:00"
   },
-  "trapezoidal rule": {
+  "trapezoidal_rule": {
     "count": 2,
     "examples": [
       "Trapezoidal Rule for Numerical Integration"
@@ -3950,7 +3630,7 @@
     ],
     "last_seen": "2026-01-26T13:20:18.454772+00:00"
   },
-  "truth tables": {
+  "truth_tables": {
     "count": 1,
     "examples": [
       "NOR Gate Implementation"
@@ -3979,32 +3659,26 @@
     ],
     "last_seen": "2026-01-24T10:06:27.358667+00:00"
   },
-  "twin primes": {
+  "twin_primes": {
     "count": 1,
     "examples": [
       "Twin Prime Checker"
     ],
     "last_seen": "2026-01-26T13:37:05.281611+00:00"
   },
-  "two-pointer": {
+  "two_pointer": {
     "count": 3,
     "examples": [
       "Three Sum",
       "Triplet Sum Problem",
-      "Two-Pointer Technique"
-    ],
-    "last_seen": "2026-01-26T13:37:52.305320+00:00"
-  },
-  "two_pointers": {
-    "count": 3,
-    "examples": [
+      "Two-Pointer Technique",
       "Palindrome Linked List",
       "Finding the Middle Element of a Linked List",
       "Trapped Rainwater"
     ],
-    "last_seen": "2026-01-24T09:52:53.311738+00:00"
+    "last_seen": "2026-01-26T13:37:52.305320+00:00"
   },
-  "union-find": {
+  "union_find": {
     "count": 2,
     "examples": [
       "Disjoint Set (Union-Find)",
@@ -4012,19 +3686,13 @@
     ],
     "last_seen": "2026-01-23T09:35:39.799469+00:00"
   },
-  "unit testing": {
+  "unit_testing": {
     "count": 1,
     "examples": [
-      "Knapsack Problem Tests"
-    ],
-    "last_seen": "2026-01-26T10:35:19.787223+00:00"
-  },
-  "unit-testing": {
-    "count": 1,
-    "examples": [
+      "Knapsack Problem Tests",
       "KD-Tree Testing"
     ],
-    "last_seen": "2026-01-24T00:25:57.143508+00:00"
+    "last_seen": "2026-01-26T10:35:19.787223+00:00"
   },
   "unittest": {
     "count": 1,
@@ -4068,7 +3736,7 @@
     ],
     "last_seen": "2026-01-26T12:49:54.425310+00:00"
   },
-  "vector manipulation": {
+  "vector_manipulation": {
     "count": 1,
     "examples": [
       "Koch Snowflake Generation"
@@ -4085,7 +3753,7 @@
   "vigenere": {
     "count": 1,
     "examples": [
-      "Vigenère Cipher Implementation"
+      "Vigen\u00e8re Cipher Implementation"
     ],
     "last_seen": "2026-01-23T08:51:43.342916+00:00"
   },
@@ -4103,14 +3771,14 @@
     ],
     "last_seen": "2026-01-24T09:46:33.525358+00:00"
   },
-  "word ladder": {
+  "word_ladder": {
     "count": 1,
     "examples": [
       "Word Ladder"
     ],
     "last_seen": "2026-01-23T02:43:30.115636+00:00"
   },
-  "word processing": {
+  "word_processing": {
     "count": 1,
     "examples": [
       "Reverse Words Longer Than Length"

@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import json
-import re
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Literal
 from langchain_core.documents import Document
 from pydantic import BaseModel, Field
 from resources import llm, vector_store
+from kb.tags import canonicalize_tags, normalize_tag
 from state_access import problem_state, session_state
 from utils.logging import log_stage
 from state_models import CoachState
@@ -28,6 +28,7 @@ class SolutionChunkModel(BaseModel):
 
 class SolutionChunksOutput(BaseModel):
     chunks: List[SolutionChunkModel] = Field(default_factory=list)
+
 
 # Create Document from solution chunk
 def make_solution_document(state: Dict[str, Any]) -> Document:
@@ -56,12 +57,6 @@ def make_solution_document(state: Dict[str, Any]) -> Document:
     def _json(obj: Any) -> str:
         return json.dumps(obj, ensure_ascii=False, sort_keys=True)
 
-    def _slugify_tag(tag: str) -> str:
-        t = tag.strip().lower()
-        t = re.sub(r"\s+", "_", t)
-        t = re.sub(r"[^a-z0-9_]+", "", t)
-        return t
-
     doc_type = _norm_str(state.get("type") or "note")
     title = _norm_str(state.get("title"))
     summary = _norm_str(state.get("summary"))
@@ -71,7 +66,7 @@ def make_solution_document(state: Dict[str, Any]) -> Document:
     source_url = _norm_str(state.get("source_url"))
     source = _norm_str(state.get("source") or "solution")
 
-    tags = _norm_list(state.get("tags"))
+    tags = canonicalize_tags(_norm_list(state.get("tags")))
     prerequisites = _norm_list(state.get("prerequisites"))
     pitfalls = _norm_list(state.get("pitfalls"))
     key_ideas = _norm_list(state.get("key_ideas"))
@@ -135,7 +130,7 @@ def make_solution_document(state: Dict[str, Any]) -> Document:
     }
 
     for t in tags:
-        slug = _slugify_tag(t)
+        slug = normalize_tag(t)
         if slug:
             metadata[f"tag__{slug}"] = True
 

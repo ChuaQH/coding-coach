@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Literal, Tuple
 from langchain_core.documents import Document
 from copy import copy
 from resources import llm, vector_store
-from kb.tags import VOCAB_SET, TAG_RESOLVER, build_must_filter, expand_exact, tag_key
+from kb.tags import VOCAB_SET, TAG_RESOLVER, build_must_filter, canonicalize_tags, expand_exact, tag_key
 from state_access import problem_state, retrieval_state
 from state_models import RetrievalAssessmentOutput, RetrievalQueryOutput
 from utils.logging import log_stage
@@ -106,6 +106,9 @@ def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     structured_llm = llm.with_structured_output(RetrievalQueryOutput)
     resp = structured_llm.invoke([("system", SYSTEM), ("user", user_prompt)])
     rq = resp.model_dump()
+    rq["must_tags"] = canonicalize_tags(rq.get("must_tags") or [])
+    rq["should_tags"] = canonicalize_tags(rq.get("should_tags") or [])
+    rq["avoid_tags"] = canonicalize_tags(rq.get("avoid_tags") or [])
 
     ret.query = rq
     ret.original_query = copy(rq)
@@ -359,6 +362,8 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
     structured_llm = llm.with_structured_output(RetrievalAssessmentOutput)
     resp = structured_llm.invoke([("system", system_prompt), ("user", user_prompt)])
     assessment = resp.model_dump()
+    assessment["missing_concepts"] = canonicalize_tags(assessment.get("missing_concepts") or [])
+    assessment["missing_algorithms"] = canonicalize_tags(assessment.get("missing_algorithms") or [])
 
     if has_known_solution and assessment.get("sufficient") is False:
         blockers = (assessment.get("missing_concepts") or []) + (assessment.get("missing_algorithms") or [])

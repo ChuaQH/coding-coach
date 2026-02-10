@@ -27,14 +27,3 @@ class TagVocabStore:
         if not self.vocab:
             self.load()
         return sorted(self.vocab.keys())
-
-    def get_tag_examples(self, tag_name: str) -> List[str]:
-        if not self.vocab:
-            self.load()
-        entry = self.vocab.get(tag_name) or {}
-        examples = entry.get("examples") or []
-        return list(examples)
-
-# vocab_store = TagVocabStore()
-# vocab_store.load()
-# print(vocab_store.list_tags())

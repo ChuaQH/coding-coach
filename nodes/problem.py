@@ -6,6 +6,7 @@ from typing import Any, Dict
 from helpers.leetcode_solution_helper import fetch_leetcode_python_solution, get_leetcode_title_from_id
 
 from resources import llm
+from kb.tags import canonicalize_tags
 from state_access import problem_state, session_state
 from state_models import ProblemDescriptionModel, ProblemMetadataModel, SolutionAnalysisModel
 from utils.logging import log_stage
@@ -70,6 +71,7 @@ def resolve_problem_description_node(state: Dict[str, Any]) -> Dict[str, Any]:
     structured_llm = llm.with_structured_output(ProblemDescriptionModel)
     resp = structured_llm.invoke([("system", SYSTEM), ("user", description)])
     pd = resp.model_dump()
+    pd["tags"] = canonicalize_tags(pd.get("tags") or [])
 
     log_stage(
         "resolve_problem_description",
@@ -146,6 +148,7 @@ def resolve_leetcode_solution_node(state: Dict[str, Any]) -> Dict[str, Any]:
     structured_llm = llm.with_structured_output(SolutionAnalysisModel)
     resp = structured_llm.invoke([("system", SYSTEM), ("user", user_prompt)])
     sa = resp.model_dump()
+    sa["solution_tags"] = canonicalize_tags(sa.get("solution_tags") or [])
 
     log_stage("resolve_leetcode_solution", "parsed", sa)
     prob.solution_analysis = sa
