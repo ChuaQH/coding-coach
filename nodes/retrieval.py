@@ -34,8 +34,8 @@ def should_continue_retrieval(state: Dict[str, Any]) -> bool:
 
 # Node to generate kb retrieval query
 def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    prob = problem_state(state)  
-    ret = retrieval_state(state)  
+    prob = problem_state(state)
+    ret = retrieval_state(state)
 
     md = prob.metadata or {}
     pd = prob.description or {}
@@ -57,31 +57,36 @@ def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     use_solution = solution_matches and (len(solution_tags) > 0 or len(solution_invariants) > 0)
     mode = "solution_guided" if use_solution else "problem_only"
 
+    tag_candidates = canonicalize_tags(problem_tags + (solution_tags if use_solution else []))
+    tag_candidate_set = set(tag_candidates)
+
     SYSTEM = """
     You generate a retrieval query for a knowledge base of algorithm cards.
 
+    IMPORTANT: Stored cards are plain text like:
+    <Title line>
+    <1-2 line summary>
+    Key ideas: <Key ideas separated by semicolons>
+    Pitfalls: <Pitfalls separated by semicolons>
+    Use when: <Use when description>
+    Avoid when: <Avoid when description>
+    Tags: <tag1>, <tag2>, ...
+
     Return ONLY JSON with:
-    - query: a concise search string combining high-signal keywords and tags
+    - query: a concise search string optimized to match those cards
     - query_parts: {"title_keywords": [...], "summary_keywords": [...], "constraint_keywords": [...], "tags": [...], "key_ideas": [...]}
-    - must_tags: tags that must be present
-    - should_tags: tags that are helpful
-    - avoid_tags: tags that are misleading
-    - rationale: 1–2 sentences describing how the query aligns to the stored card fields
+    - must_tags: 0–1 tags (be conservative; prefer [] over a wrong must_tag)
+    - should_tags: up to 6 tags
+    - avoid_tags: up to 4 tags
+    - rationale: 1–2 sentences describing alignment to stored card fields
 
-    Modes:
-    - If mode == "solution_guided":
-        * Prefer solution_tags as must_tags (high precision).
-        * Use problem title/summary/constraints as supporting keywords only.
-        * Use solution_invariants/solution_pitfalls ONLY as key_ideas keywords, not as must_tags.
-        * Use solution time/space complexity as constraint_keywords when helpful.
-    - If mode == "problem_only":
-        * Infer tags from the problem and be conservative with must_tags.
-        * Use constraints and summary to choose high-signal keywords.
+    Rules:
+    1) Tags MUST be chosen ONLY from tag_candidates provided by the user.
+    2) query should look like what’s in the cards: technique/pattern words + key idea words + tags.
+    3) Avoid problem story nouns; prefer canonical technique/pattern language.
+    4) If mode == solution_guided: use solution tags/strategy as hints, but do NOT over-constrain must_tags.
 
-    General rules:
-    - Do NOT propose a solution.
-    - Keep must_tags short (0–3 items) and high precision.
-    - Output must follow the schema exactly.
+    Output must follow schema exactly. No extra keys. No markdown.
     """.strip()
 
     inv_sample = solution_invariants[:4]
@@ -93,22 +98,33 @@ def generate_retrieval_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     Problem title: {title}
     Problem summary: {summary}
     Problem constraints: {json.dumps(constraints, ensure_ascii=False)}
-    Problem-derived candidate tags: {problem_tags}
+    tag_candidates: {tag_candidates}
 
     {"Solution strategy: " + solution_strategy if use_solution and solution_strategy else ""}
-    {"Solution tags: " + ", ".join(solution_tags) if use_solution and solution_tags else ""}
     {"Solution time complexity: " + solution_time if use_solution and solution_time else ""}
     {"Solution space complexity: " + solution_space if use_solution and solution_space else ""}
-    {"Solution invariants: " + "; ".join(inv_sample) if use_solution and inv_sample else ""}
-    {"Solution pitfalls: " + "; ".join(pit_sample) if use_solution and pit_sample else ""}
+    {"Solution invariants (keywords only): " + "; ".join(inv_sample) if use_solution and inv_sample else ""}
+    {"Solution pitfalls (keywords only): " + "; ".join(pit_sample) if use_solution and pit_sample else ""}
     """.strip()
 
     structured_llm = llm.with_structured_output(RetrievalQueryOutput)
     resp = structured_llm.invoke([("system", SYSTEM), ("user", user_prompt)])
     rq = resp.model_dump()
+
     rq["must_tags"] = canonicalize_tags(rq.get("must_tags") or [])
     rq["should_tags"] = canonicalize_tags(rq.get("should_tags") or [])
     rq["avoid_tags"] = canonicalize_tags(rq.get("avoid_tags") or [])
+
+    rq["must_tags"] = [t for t in rq["must_tags"] if t in tag_candidate_set][:1]
+    rq["should_tags"] = [t for t in rq["should_tags"] if t in tag_candidate_set][:6]
+    rq["avoid_tags"] = [t for t in rq["avoid_tags"] if t in tag_candidate_set][:4]
+
+    chosen_tags = rq["must_tags"] + rq["should_tags"]
+    if chosen_tags:
+        q = (rq.get("query") or "").strip()
+        tag_tail = " Tags: " + ", ".join(chosen_tags)
+        if "tags:" not in q.lower():
+            rq["query"] = (q + tag_tail).strip()
 
     ret.query = rq
     ret.original_query = copy(rq)
@@ -292,6 +308,9 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
     solution_matches_problem = bool(sa.get("solution_matches_problem", False))
     has_known_solution = bool(leetcode_solution_code) and (existing_question in ("leetcode", "inferred"))
 
+    tag_candidates = canonicalize_tags((pd.get("tags") or []) + (sa.get("solution_tags") or []))
+    tag_candidate_set = set(tag_candidates)
+
     log_stage(
         "assess_retrieval_coverage",
         "input",
@@ -324,6 +343,17 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
         - If an authoritative solution is present, DO NOT require missing algorithms/KB chunks.
         - Mark sufficient=true unless the solution appears incorrect, incomplete, or non-optimal for the given constraints.
 
+        If you recommend follow-up queries, they MUST be short, query-like strings optimized for the KB cards:
+        <Title line>
+        <1-2 line summary>
+        Key ideas: <...>
+        Pitfalls: <...>
+        Use when: <...>
+        Avoid when: <...>
+        Tags: <tag1>, <tag2>, ...
+
+        Use only tag candidates provided (if any). If you include tags, add "Tags: ..." to the query.
+
         Return ONLY JSON with:
         - sufficient: true/false
         - missing_concepts: list (ONLY items that block correctness/optimality)
@@ -338,12 +368,24 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
         Solution analysis: {json.dumps(sa, ensure_ascii=False)}
         LeetCode solution code (truncated): {leetcode_solution_code[:2000]}
         Retrieved chunks (optional): {json.dumps(condensed_results[:5], ensure_ascii=False)}
+        tag_candidates: {tag_candidates}
         """.strip()
 
     else:
         system_prompt = """
         You are evaluating whether retrieved knowledge chunks contain enough relevant concepts and algorithms
         to solve the problem in an optimal way.
+
+        If you recommend follow-up queries, they MUST be short, query-like strings optimized for the KB cards:
+        <Title line>
+        <1-2 line summary>
+        Key ideas: <...>
+        Pitfalls: <...>
+        Use when: <...>
+        Avoid when: <...>
+        Tags: <tag1>, <tag2>, ...
+
+        Use only tag candidates provided (if any). If you include tags, add "Tags: ..." to the query.
 
         Return ONLY JSON with:
         - sufficient: true/false
@@ -357,6 +399,7 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
         Problem metadata: {json.dumps(md, ensure_ascii=False)}
         Problem description: {json.dumps(pd, ensure_ascii=False)}
         Retrieved chunks: {json.dumps(condensed_results, ensure_ascii=False)}
+        tag_candidates: {tag_candidates}
         """.strip()
 
     structured_llm = llm.with_structured_output(RetrievalAssessmentOutput)
@@ -364,6 +407,23 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
     assessment = resp.model_dump()
     assessment["missing_concepts"] = canonicalize_tags(assessment.get("missing_concepts") or [])
     assessment["missing_algorithms"] = canonicalize_tags(assessment.get("missing_algorithms") or [])
+
+    followups = assessment.get("recommended_followup_queries") or []
+    filtered_followups = []
+    for q in followups:
+        if not isinstance(q, str) or not q.strip():
+            continue
+        if "tags:" in q.lower() and tag_candidate_set:
+            tags_part = q.split("Tags:", 1)[1] if "Tags:" in q else q.split("tags:", 1)[1]
+            chosen = canonicalize_tags([t.strip() for t in tags_part.split(",") if t.strip()])
+            chosen = [t for t in chosen if t in tag_candidate_set]
+            base = q.split("Tags:", 1)[0].strip() if "Tags:" in q else q.split("tags:", 1)[0].strip()
+            if chosen:
+                q = f"{base} Tags: {', '.join(chosen)}".strip()
+            else:
+                q = base
+        filtered_followups.append(q)
+    assessment["recommended_followup_queries"] = filtered_followups
 
     if has_known_solution and assessment.get("sufficient") is False:
         blockers = (assessment.get("missing_concepts") or []) + (assessment.get("missing_algorithms") or [])

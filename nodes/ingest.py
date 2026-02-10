@@ -77,42 +77,19 @@ def make_solution_document(state: Dict[str, Any]) -> Document:
 
     parts: List[str] = []
     if title:
-        parts.append(f"Title: {title}")
-    parts.append(f"Type: {doc_type}")
-    parts.append(f"Source: {source}")
-
+        parts.append(title)
     if summary:
-        parts += ["", "Summary:", summary]
-    if when_to_use:
-        parts += ["", "When to use:", when_to_use]
-    if when_not_to_use:
-        parts += ["", "When NOT to use:", when_not_to_use]
-
+        parts.append(summary)
     if key_ideas:
-        parts += ["", "Key ideas:"] + [f"- {x}" for x in key_ideas]
-    if prerequisites:
-        parts += ["", "Prerequisites:"] + [f"- {x}" for x in prerequisites]
-
-    if complexity:
-        parts += ["", "Complexity:"] + [f"- {k}: {v}" for k, v in complexity.items()]
-
+        parts.append("Key ideas: " + "; ".join(key_ideas))
     if pitfalls:
-        parts += ["", "Pitfalls:"] + [f"- {x}" for x in pitfalls]
-
+        parts.append("Pitfalls: " + "; ".join(pitfalls))
+    if when_to_use:
+        parts.append("Use when: " + when_to_use)
+    if when_not_to_use:
+        parts.append("Avoid when: " + when_not_to_use)
     if tags:
-        parts += ["", "Tags:", ", ".join(tags)]
-
-    if pseudocode:
-        parts += ["", "Pseudocode:", pseudocode]
-    if python_snippet:
-        parts += ["", "Python snippet:", python_snippet]
-
-    if source_platform or source_url:
-        parts += ["", "Sources:"]
-        if source_platform:
-            parts.append(f"- platform: {source_platform}")
-        if source_url:
-            parts.append(f"- {source_url}")
+        parts.append("Tags: " + ", ".join(tags))
 
     page_content = "\n".join(parts).strip()
 
@@ -125,6 +102,13 @@ def make_solution_document(state: Dict[str, Any]) -> Document:
         "tags_csv": ", ".join(tags) if tags else None,
         "prerequisites_csv": ", ".join(prerequisites) if prerequisites else None,
         "complexity_json": _json(complexity) if complexity else None,
+        "summary": summary or None,
+        "when_to_use": when_to_use or None,
+        "when_not_to_use": when_not_to_use or None,
+        "key_ideas_json": _json(key_ideas) if key_ideas else None,
+        "pitfalls_json": _json(pitfalls) if pitfalls else None,
+        "pseudocode": pseudocode or None,
+        "python_snippet": python_snippet or None,
         "doc_schema": "SolutionChunk_v1",
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
