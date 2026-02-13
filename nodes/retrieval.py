@@ -10,6 +10,7 @@ from kb.tags import VOCAB_SET, TAG_RESOLVER, build_must_filter, canonicalize_tag
 from state_access import problem_state, retrieval_state
 from state_models import RetrievalAssessmentOutput, RetrievalQueryOutput
 from utils.logging import log_stage
+from utils.text_format import compact_kb_cards
 
 # Function to decide whether to continue retrieval
 def should_continue_retrieval(state: Dict[str, Any]) -> bool:
@@ -322,16 +323,7 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
         },
     )
 
-    condensed_results = [
-        {
-            "title": (r.get("metadata", {}) or {}).get("title"),
-            "type": (r.get("metadata", {}) or {}).get("type"),
-            "tags": (r.get("metadata", {}) or {}).get("tags_csv"),
-            "content_snippet": ((r.get("content") or "")[:400]),
-            "score": r.get("score"),
-        }
-        for r in retrieval_results
-    ]
+    condensed_results = compact_kb_cards(retrieval_results)
 
     if has_known_solution:
         system_prompt = """
@@ -367,7 +359,7 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
         Problem description: {json.dumps(pd, ensure_ascii=False)}
         Solution analysis: {json.dumps(sa, ensure_ascii=False)}
         LeetCode solution code (truncated): {leetcode_solution_code[:2000]}
-        Retrieved chunks (optional): {json.dumps(condensed_results[:5], ensure_ascii=False)}
+        Retrieved chunks (optional): {condensed_results}
         tag_candidates: {tag_candidates}
         """.strip()
 
@@ -375,6 +367,18 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
         system_prompt = """
         You are evaluating whether retrieved knowledge chunks contain enough relevant concepts and algorithms
         to solve the problem in an optimal way.
+
+        IMPORTANT: The KB chunks may contain ONLY algorithms, code implementations, and complexity.
+        Do NOT require conceptual exposition (e.g., "optimal substructure") if the algorithm/recurrence/implementation implies it.
+
+        Define sufficient=true if, using (problem metadata + description + retrieved chunks), we can:
+        (1) identify at least one applicable standard/optimal algorithm for this problem,
+        (2) provide actionable code feedback using a reference implementation or clear algorithm steps,
+        (3) benchmark efficiency using stated or safely inferable time/space complexity.
+
+        Only mark missing_concepts/missing_algorithms if they BLOCK algorithm selection or code feedback.
+        If multiple algorithms could apply, require enough criteria to choose between them (e.g., constraints, preconditions).
+        Return evidence for each requirement from the chunks (quote short phrases or point to titles/tags).
 
         If you recommend follow-up queries, they MUST be short, query-like strings optimized for the KB cards:
         <Title line>
@@ -398,7 +402,7 @@ def assess_retrieval_coverage_node(state: Dict[str, Any]) -> Dict[str, Any]:
         user_prompt = f"""
         Problem metadata: {json.dumps(md, ensure_ascii=False)}
         Problem description: {json.dumps(pd, ensure_ascii=False)}
-        Retrieved chunks: {json.dumps(condensed_results, ensure_ascii=False)}
+        Retrieved chunks: {condensed_results}
         tag_candidates: {tag_candidates}
         """.strip()
 
