@@ -4,8 +4,6 @@ import json
 from typing import Any, Dict, List
 
 
-# ---------- helpers for PEP retrieval ----------
-
 def _extract_context(code: str, line_1based: int, radius: int = 2) -> str:
     lines = code.splitlines()
     i = max(0, line_1based - 1)

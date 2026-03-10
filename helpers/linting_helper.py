@@ -7,13 +7,6 @@ import subprocess
 import tempfile
 from typing import Any, Dict, List, Tuple
 
-# ---- Your existing KB getter ----
-# from your_module import get_in_memory_vector_store
-
-
-# =========================
-# Tool runners (same style)
-# =========================
 
 def run_ruff_outputs(code: str) -> Tuple[List[Dict[str, Any]], str]:
     """
@@ -39,22 +32,17 @@ def run_ruff_outputs(code: str) -> Tuple[List[Dict[str, Any]], str]:
             except Exception:
                 return 999, "", ""
 
-        # ruff check JSON
         _, out, _ = run(["ruff", "check", "--output-format=json", "--no-cache", "solution.py"])
         if out.strip():
             try:
                 parsed = json.loads(out)
                 if isinstance(parsed, list):
-                    # Ruff emits a list of issue objects
                     ruff_json = parsed
             except Exception:
-                # If JSON parsing fails, keep it empty (node can still run)
                 ruff_json = []
 
-        # ruff format diff
         _, out, _ = run(["ruff", "format", "--diff", "solution.py"])
         ruff_format_diff = (out or "").strip()
-        # Ruff formatter usually uses stdout for diff; stderr typically empty.
 
     return ruff_json, ruff_format_diff
 
@@ -103,14 +91,3 @@ def run_mypy_stdout(
         mypy_out = combined
 
     return mypy_out
-
-
-# =========================
-# PEP retrieval helpers
-# =========================
-
-
-from helpers.pep_helper import (  # noqa: E402
-    build_pep_queries_from_findings,
-    query_pep_kb,
-)

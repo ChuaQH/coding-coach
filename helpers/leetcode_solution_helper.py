@@ -186,7 +186,7 @@ def fetch_leetcode_python_solution(
 
     by_number, by_title = _build_combined_index(tuple(index_blob_urls))
 
-    # number lookup
+    # Number lookup
     if isinstance(problem_number_or_title, int) or re.fullmatch(r"\s*\d{1,4}\s*", str(problem_number_or_title)):
         num = int(str(problem_number_or_title).strip())
         if num not in by_number:
@@ -194,7 +194,7 @@ def fetch_leetcode_python_solution(
         _, py_raw_url = by_number[num]
         return _fetch_text(py_raw_url)
 
-    # title lookup
+    # Title lookup
     key = _normalize_title(str(problem_number_or_title))
     if key not in by_title:
         raise ValueError(f"Problem title '{problem_number_or_title}' not found (or no Python .py link found) in provided indexes.")
@@ -243,7 +243,3 @@ def get_leetcode_title_from_id(
         raise ValueError(f"Problem id '{num}' not found in provided indexes.")
     title, _ = by_number[num]
     return title
-
-# Example:
-# print(fetch_leetcode_python_solution(1)[:200])
-# print(fetch_leetcode_python_solution(1500)[:200])  # from 1001-2000.md if present
