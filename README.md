@@ -98,7 +98,7 @@ An agentic coding coach designed to help users learn problem-solving and program
     - `update_retrieval_counters`
     - `assess_retrieval_coverage`
     - `plan_next_retrieval` (conditional loop)
-    - `mark_kb_insufficient`
+    - `set_kb_sufficiency_flag`
 
 - **Interactive coaching loop**
     - `get_attempt` (interrupt)
